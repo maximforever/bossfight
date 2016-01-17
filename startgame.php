@@ -18,14 +18,6 @@
 
 	//---create game button---//
 		if(isset($_POST["creategame"])) {
-			include("newgame.php");
-			$gameid = newgame();
-
-			header("location: index.php?game=".$gameid);
-		}
-
-	//---join game button---//
-		if(isset($_POST["joingame"])) {
 			if(empty($_POST["name"]) {
 				$nameError = "<div class='errormessage'>enter a name</div>";
 			}
@@ -43,14 +35,30 @@
 			}
 			else {
 				$name = $_POST["name"];
-
 				$browserinfo = $_SERVER['HTTP_USER_AGENT'];
-				
-				include("newplayer.php");
-				new_player($name, $gameid, $browserinfo);
 
-				header("location: index.php");
+				include("newgame.php");
+				$gameid = newgame();
+
+				include("newplayer.php");
+				$playerid = new_player($name, $gameid, $browserinfo);
+				$_SESSION["player"] = $playerid;
+
+				header("location: leader.html");
 			}
+		}
+
+	//---join game button---//
+		if(isset($_POST["joingame"])) {
+			$name = $_POST["name"];
+			$gameid = $_POST["joincode"];
+			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
+				
+			include("newplayer.php");
+			$playerid = new_player($name, $gameid, $browserinfo);
+			$_SESSION["playerid"] = $playerid;
+
+			header("location: participant.html");
 		}
 
 	//---start game button---//
@@ -75,7 +83,7 @@
 				mysql_query($query3) or die (mysql_error());
 			}
 
-			header("location: index.php");
+			header("location: main.html");
 		}
 
 ?>

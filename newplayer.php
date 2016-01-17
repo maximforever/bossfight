@@ -16,6 +16,8 @@
 
 		$query4 = "UPDATE games SET players = CONCAT(players,'$playerid,') WHERE gameid = '$gameid' ";
 			mysql_query($query4) or die (mysql_error());
+
+		return $playerid;
 	}
 
 ?>
