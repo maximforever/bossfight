@@ -2,6 +2,9 @@
 
 body {
     background: rgba(155, 63, 0, 1);
+    font-family: 'Fondamento', cursive;
+    width: 100%;
+    height: 100%;
 }
 
 .row {
@@ -21,8 +24,78 @@ body {
     }
 }
 
-.logo {
+
+.header .logo {
     max-height: 80px;
     border: 2px solid #e5d631;
-    margin-left: 10px;
+    margin-left: 3%;
 }
+
+.dragon-hp {
+    margin-right: 3%;
+    margin-top: 0px;
+    color: black;
+    float: right;
+    text-align: right;
+}
+
+.dragon-hp h3 {
+    margin: 0px;
+    padding-top: 18%;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #852a0e;
+    border: 2px solid #6EF300;
+    height: 80px; 
+    color: #6EF300;
+    font-size: 30px;
+    font-family: 'Antic Didone', serif;
+}
+
+/* MAIN */
+.main {
+    text-align: center;
+}
+
+.main-spacing {
+    height: 25%;
+}
+
+.little-spacing {
+    height: 10%;
+}
+
+.main h3{
+    font-size: 40px;
+    color: #6EF300;
+}
+
+.main button {
+    width: 300px;
+    height: 80px;
+    font-size: 20px;
+    padding: 20px;
+    background: #FF9A53;
+    border: none;
+    outline: none;
+    margin: 0px;
+}
+
+.main button:hover {
+    background: #E65F00;
+    border: none;
+    color: white;
+}
+
+/* JUMBOTRON */
+
+.jumbotron {
+    height: 50%;
+    background: url("assets/dragon.png");
+    background-size: cover;
+    background-position: 50% 20%; 
+
+}
+
+
+
