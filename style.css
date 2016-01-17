@@ -1,0 +1,28 @@
+/* GLOBAL */
+
+body {
+    background: rgba(155, 63, 0, 1);
+}
+
+.row {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* HEADER */
+
+.header {
+    background: rgba(64, 26, 0, 0.8);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    img {
+        max-height: 30px;
+    }
+}
+
+.logo {
+    max-height: 80px;
+    border: 2px solid #e5d631;
+    margin-left: 10px;
+}
