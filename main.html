@@ -17,7 +17,8 @@
             </div>
             <div class = "col-md-9">
                 <div class = "dragon-hp">
-                    <h3>HP: 300</h3>
+                    <h3>WEATHER: <span id = "#">SUNNY</span></h3>
+                    <h3>HP: <span id = "#">300</span></h3>
                 </div>
             </div>
         </div>
@@ -30,19 +31,49 @@
     </div> 
 
 
-    <div class = "main">
+    <div class = "main ">
         <div class= "container">
-            <div class = "little-spacing"></div>
-                <button class = "join-game">Attack</button>
-                <button class = "create-game">Defend</button>
-                <button class = "create-game">Rest</button>
+            <div class = "player-stats">
+                <div class = "row">
+                    <div class = "col-md-4">HEALTH: <span class = "stat" id = "#">20</span></div>
+                    <div class = "col-md-4">STRENGTH: <span class = "stat" id = "#">10</span></div>
+                    <div class = "col-md-4">SPEED: <span class = "stat" id = "#">10</span></div>
+                </div>
+
+
+            </div>
+
+            <div class = "row">
+                <div class = "col-md-3">
+                    <h6 class = "team-heading">Teammates:</h6>
+                    <ul class = "teammates" id = "team-list">
+                        <li id = "#">Name 1</li>
+                        <li id = "#">Name 2</li>
+                        <li id = "#">Name 3</li>
+                        <li id = "#">Name 4</li>
+                    </ul>
+                </div>
+
+                <div class = "col-md-9 player-choices">
+                    <button class = "active" id = "attack">Attack</button>
+                    <button class = "active"  id = "dodge">Dodge</button>
+                    <button class = "active" id = "rest">Rest</button>
+                </div>
+
+
+
+            </div>
+
+
+                
         </div>
     </div>
         
 
 
 
-
+    <script src="assets/jquery-2.2.0.min.js"></script>
+    <script src="script.js"></script>
     </BODY>
 
 </HTML>
