@@ -1,10 +1,12 @@
 <?php
+	
+	include("config.php");
 
 	//---determine game & player---//
-		if(isset($_SESSION["player"])) {
+		if(isset($_SESSION["playerid"])) {
 			$playerid = $_SESSION["playerid"];
 			$query0 = "SELECT * FROM players WHERE playerid = '$playerid' ";
-			$recordset = mysql_query($query1) or die (mysql_error());
+			$recordset = mysql_query($query0) or die (mysql_error());
 			$row = mysql_fetch_array($recordset);
 
 			$gameid = $row["gameid"];
@@ -18,34 +20,17 @@
 
 	//---create game button---//
 		if(isset($_POST["creategame"])) {
-			if(empty($_POST["name"]) {
-				$nameError = "<div class='errormessage'>enter a name</div>";
-			}
-			elseif (!preg_match("/^[a-zA-Z0-9]*$/",$_POST["name"])) {
-		 		$nameError = "<div class='errormessage'>only include letters & numbers</div>";
-			}
-			elseif (preg_match("/^[0-9]*$/",$_POST["name"])) {
-				$nameError = "<div class='errormessage'>include letters too</div>";
-			}
-			elseif (strlen($_POST["name"]) > 16) {
-				$nameError = "<div class='errormessage'>keep it 4-16 characters</div>";
-			}
-			elseif (strlen($_POST["name"]) < 4) {
-				$nameError = "<div class='errormessage'>keep it 4-16 characters</div>";
-			}
-			else {
-				$name = $_POST["name"];
-				$browserinfo = $_SERVER['HTTP_USER_AGENT'];
+			$name = $_POST["name"];
+			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
 
-				include("newgame.php");
-				$gameid = newgame();
+			include("newgame.php");
+			$gameid = new_game();
 
-				include("newplayer.php");
-				$playerid = new_player($name, $gameid, $browserinfo);
-				$_SESSION["player"] = $playerid;
+			include("newplayer.php");
+			$playerid = new_player($name, $gameid, $browserinfo);
+			$_SESSION["playerid"] = $playerid;
 
-				header("location: leader.html");
-			}
+			header("location: leader.php?game=".$gameid);
 		}
 
 	//---join game button---//
@@ -58,15 +43,15 @@
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: participant.html");
+			header("location: participant.php");
 		}
 
 	//---start game button---//
-		if(isset($_POST["startgame"])) {
-			$query1 = "UPDATE games SET gamestate = ('waiting') WHERE gameid = '$gameid' ";
+		if(isset($_POST["startgame"]) and isset($_SESSION["playerid"])) {
+			$query1 = "UPDATE games SET gamestate=('playerturn') WHERE gameid = '$gameid' ";
 				mysql_query($query1) or die (mysql_error());
 
-			$query2 = "SELECT * FROM players WHERE gameid = '$gameid' ";
+			$query2 = "SELECT * FROM players WHERE gameid =('$gameid') ";
 				$recordset = mysql_query($query2) or die (mysql_error());
 
 			$arrayplayersid = array("");
@@ -78,12 +63,16 @@
 				$arrayplayersid = array_merge($arrayplayersid, $arrayplayerid);
 			}
 
+			$bosshealth = 0;
 			foreach($arrayplayersid as $playerid) {
-				$query3 = "UPDATE players SET playerstate = ('ready') WHERE playerid = '$playerid' ";
+				$query3 = "UPDATE players SET playerstate =('playerturn') WHERE playerid = '$playerid' ";
 				mysql_query($query3) or die (mysql_error());
+				$bosshealth = $bosshealth + 30;
 			}
 
-			header("location: main.html");
+			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";
+
+			header("location: main.php");
 		}
 
 ?>

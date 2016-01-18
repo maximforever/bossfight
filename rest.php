@@ -23,10 +23,10 @@
 		$query4 = "UPDATE players SET speed = ('$newspeed') WHERE playerid = '$playerid' ";
 			mysql_query($query4) or die (mysql_error());
 
-		$query5 = "UPDATE players SET playerstate = ('waiting') WHERE playerid = '$playerid' ";
+		$query5 = "UPDATE players SET playerstate = ('gameturn') WHERE playerid = '$playerid' ";
 			mysql_query($query5) or die (mysql_error());
 
-		$rest = "true";
+		$rest = 4;
 		return $rest;
 	}
 

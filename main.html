@@ -17,7 +17,7 @@
             </div>
             <div class = "col-md-9">
                 <div class = "dragon-hp">
-                    <h3>WEATHER: <span id = "#">SUNNY</span></h3>
+                    <h3>WEATHER: <span id = "weather">SUNNY</span></h3>
                     <h3>HP: <span id = "#">300</span></h3>
                 </div>
             </div>
@@ -35,9 +35,9 @@
         <div class= "container">
             <div class = "player-stats">
                 <div class = "row">
-                    <div class = "col-md-4">HEALTH: <span class = "stat" id = "#">20</span></div>
-                    <div class = "col-md-4">STRENGTH: <span class = "stat" id = "#">10</span></div>
-                    <div class = "col-md-4">SPEED: <span class = "stat" id = "#">10</span></div>
+                    <div class = "col-md-4">HEALTH: <span class = "stat" id = "health"></span></div>
+                    <div class = "col-md-4">STRENGTH: <span class = "stat" id = "strength"></span></div>
+                    <div class = "col-md-4">SPEED: <span class = "stat" id = "speed"></span></div>
                 </div>
 
 
@@ -55,9 +55,9 @@
                 </div>
 
                 <div class = "col-md-9 player-choices">
-                    <button class = "active" id = "attack">Attack</button>
-                    <button class = "active"  id = "dodge">Dodge</button>
-                    <button class = "active" id = "rest">Rest</button>
+                    <button class = "active" id = "attack" onclick="playermove(attack)">Attack</button>
+                    <button class = "active"  id = "dodge" onclick="playermove(dodge)">Dodge</button>
+                    <button class = "active" id = "rest" onclick="playermove(rest)">Rest</button>
                 </div>
 
 
