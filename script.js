@@ -36,26 +36,34 @@ function main(){
                 cache: false,
                 success: function(result) {
                     var resultArray = result.split(";");
-                    $("#name").empty();
-                    $("#name").append(resultArray[0]);
-
-                    $("#health").empty();
-                    $("#health").append(resultArray[1]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[2]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[3]);
-
-                    $("#state").empty();
-                    $("#state").append(resultArray[4]);
-
+                    $("#gameid").empty();
+                    $("#gameid").append(resultArray[0]);
+                    $("#boss").empty();
+                    $("#boss").append(resultArray[1]);
+                    $("#bosshealth").empty();
+                    $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[5]);
+                    $("#weather").append(resultArray[3]);
+                    $("#bossmove").empty();
+                    $("#bossmove").append(resultArray[4]);
+                    $("#gamestate").empty();
+                    $("#gamestate").append(resultArray[5]);
 
-                    $("#playerids").empty();
-                    $("#playerids").append(resultArray[6]);
+                    $("#name").empty();
+                    $("#name").append(resultArray[6]);
+                    $("#health").empty();
+                    $("#health").append(resultArray[7]);
+                    $("#strength").empty();
+                    $("#strength").append(resultArray[8]);
+                    $("#speed").empty();
+                    $("#speed").append(resultArray[9]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[10]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[11]);
+
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[7]);
+                    //refreshTeam(resultArray[12]);
                 }
             });
         });
@@ -71,26 +79,34 @@ function main(){
                 cache: false, 
                 success: function(result) {
                     var resultArray = result.split(";");
-                    $("#name").empty();
-                    $("#name").append(resultArray[0]);
-
-                    $("#health").empty();
-                    $("#health").append(resultArray[1]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[2]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[3]);
-
-                    $("#state").empty();
-                    $("#state").append(resultArray[4]);
-
+                    $("#gameid").empty();
+                    $("#gameid").append(resultArray[0]);
+                    $("#boss").empty();
+                    $("#boss").append(resultArray[1]);
+                    $("#bosshealth").empty();
+                    $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[5]);
+                    $("#weather").append(resultArray[3]);
+                    $("#bossmove").empty();
+                    $("#bossmove").append(resultArray[4]);
+                    $("#gamestate").empty();
+                    $("#gamestate").append(resultArray[5]);
 
-                    $("#playerids").empty();
-                    $("#playerids").append(resultArray[6]);
+                    $("#name").empty();
+                    $("#name").append(resultArray[6]);
+                    $("#health").empty();
+                    $("#health").append(resultArray[7]);
+                    $("#strength").empty();
+                    $("#strength").append(resultArray[8]);
+                    $("#speed").empty();
+                    $("#speed").append(resultArray[9]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[10]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[11]);
+
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[7]);
+                    //refreshTeam(resultArray[12]);
             }});    
         }, 15000);
 
@@ -105,26 +121,34 @@ function main(){
                 cache: false,
                 success: function(result) {
                     var resultArray = result.split(";");
-                    $("#name").empty();
-                    $("#name").append(resultArray[0]);
-
-                    $("#health").empty();
-                    $("#health").append(resultArray[1]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[2]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[3]);
-
-                    $("#state").empty();
-                    $("#state").append(resultArray[4]);
-
+                    $("#gameid").empty();
+                    $("#gameid").append(resultArray[0]);
+                    $("#boss").empty();
+                    $("#boss").append(resultArray[1]);
+                    $("#bosshealth").empty();
+                    $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[5]);
+                    $("#weather").append(resultArray[3]);
+                    $("#bossmove").empty();
+                    $("#bossmove").append(resultArray[4]);
+                    $("#gamestate").empty();
+                    $("#gamestate").append(resultArray[5]);
 
-                    $("#playerids").empty();
-                    $("#playerids").append(resultArray[6]);
+                    $("#name").empty();
+                    $("#name").append(resultArray[6]);
+                    $("#health").empty();
+                    $("#health").append(resultArray[7]);
+                    $("#strength").empty();
+                    $("#strength").append(resultArray[8]);
+                    $("#speed").empty();
+                    $("#speed").append(resultArray[9]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[10]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[11]);
+
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[7]);
+                    //refreshTeam(resultArray[12]);
                 }
             });
         }

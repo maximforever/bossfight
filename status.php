@@ -12,92 +12,131 @@
 			$query0 = "SELECT * FROM players WHERE playerid = '$playerid' ";
 				$recordset = mysql_query($query0) or die (mysql_error());
 				$row = mysql_fetch_array($recordset);
+			$gameid = $row["gameid"];
 
 		//---check whose turn it is---//
-			$gameid = $row["gameid"];
 			$whoseturn = whose_turn($gameid);
 			if($whoseturn == "gameturn") {
 				include("gamemove.php");
+				$progress = game_move($gameid);
+
+				if($progress = "calculating") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus; 
+				}
+				elseif($progrss = "complete") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus;
+				}
 			}
-
+		
 		//---send player status---//
-			$arrayplayerstatus = player_status($playerid);
-			$playerstatus = $arrayplayerstatus[0].";".$arrayplayerstatus[1].";".$arrayplayerstatus[2].";".$arrayplayerstatus[3].";".$arrayplayerstatus[4];
-			echo $playerstatus;
-		}
-
-	//---observer screen---//
-		else {
-			$playerid = 0;
-			if(isset($_POST["game"])) {
-				$gameid = $_POST["game"];
-
-			//---check whose turn it is---//
-				$whoseturn = whose_turn($gameid);
-				if($whoseturn == "gameturn") {
-					include("gamemove.php");
-				}
-
-			//---send game status---//
-				$arraygamestatus = game_status($gameid);
-				$gamestatus = $arraygamestatus[0].";".$arraygamestatus[1]."; ; ;".$arraygamestatus[4].";".$arraygamestatus[5];
-
-				$players = "";
-				$arrayplayers = $arraygamestatus[5];
-				foreach($arrayplayers as $player) {
-					$players = $players.$player.",";
-				}
-
-				$gamestatus = $gamestatus."; ;".$players;
+			else {
+				$gamestatus = game_status($playerid,$gameid);
 				echo $gamestatus;
 			}
 		}
 
-	//---player status---//
-		function player_status($playerid) {
-			$query1 = "SELECT * FROM players WHERE playerid = '$playerid' ";
-				$recordset = mysql_query($query1) or die (mysql_error());
-				$row = mysql_fetch_array($recordset);
+	//---observer screen---//
+		elseif(isset($_POST["game"])) {
+			$playerid = 0;
+			$gameid = $_POST["game"];
 
-			$name = $row["name"];
-			$health = $row["health"];
-			$strength = $row["strength"];
-			$speed = $row["speed"];
-			$playerstate = $row["playerstate"];
+		//---check whose turn it is---//
+			$whoseturn = whose_turn($gameid);
+			if($whoseturn == "gameturn") {
+				include("gamemove.php");
+				$progress = game_move($gameid);
 
-			$playerstatus = array($name,$health,$strength,$speed,$playerstate, "", "", "");
-			return $playerstatus;
+				if($progress = "calculating") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus; 
+				}
+				elseif($progrss = "complete") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus;
+				}
+			}
+
+		//---send game status---//
+			else {
+				$gamestatus = game_status(0,$gameid);
+				echo $gamestatus;
+			}
 		}
 
 	//---game status---//
-		function game_status($gameid) {
-			$query1 = "SELECT * FROM games WHERE gameid = '$gameid' ";
-				$recordset = mysql_query($query1) or die (mysql_error());
-				$row = mysql_fetch_array($recordset);
+		function game_status($playerid,$gameid) {
 
+			$query0 = "SELECT * FROM games WHERE gameid = '$gameid' ";
+				$recordset = mysql_query($query0) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+		
+		//---game stats---//
 			$boss = $row["boss"];
 			$bosshealth = $row["bosshealth"];
 			$weather = $row["weather"];
+			$bossmove = $row["bossmove"];
 			$gamestate = $row["gamestate"];
-			$players = $row["players"];
-
-			$arrayplayersid = explode(",",$players);
+			$arrayplayersid = explode(",",$row["players"]);
 				array_pop($arrayplayersid);
-			$arrayplayers = array("");
-				array_pop($arrayplayers);
 
-			foreach($arrayplayersid as $playerid) {
+		//---player stats---//
+			if($playerid > 0) {
+				$query1 = "SELECT * FROM players WHERE playerid = '$playerid' ";
+					$recordset = mysql_query($query1) or die (mysql_error());
+					$row = mysql_fetch_array($recordset);
+
+				$name = $row["name"];
+				$health = $row["health"];
+				$strength = $row["strength"];
+				$speed = $row["speed"];
+				$playermove = $row["playermove"];
+				$playerstate = $row["playerstate"];
+
+				$arrayplayerid = array($playerid);
+				$arrayplayersid = array_diff($arrayplayersid,$arrayplayerid);
+			}
+			else {
+				$name = $boss;
+				$health = 0;
+				$strength = 0;
+				$speed = 0;
+				$playermove = 0;
+				$playerstate = 0;
+			}
+
+		//---players list---//
+			$arrayplayernames = array("");
+				array_pop($arrayplayernames);
+			foreach ($arrayplayersid as $playerid) {
 				$query2 = "SELECT * FROM players WHERE playerid = '$playerid' ";
 					$recordset = mysql_query($query2) or die (mysql_error());
 					$row = mysql_fetch_array($recordset);
-					$name = $row["name"];
-
-				$arrayname = array($name);
-				$arrayplayers = array_merge($arrayplayers, $arrayname);
+				$arrayplayername = array($row["name"]);
+				$arrayplayernames = array_merge($arrayplayernames, $arrayplayername);
 			}
 
-			$gamestatus = array($boss, $bosshealth, "", "", $gamestate, $weather, $arrayplayersid, $arrayplayers);
-			return $gamestatus;
+			$playernames = "";
+			foreach ($arrayplayernames as $playername) {
+				$playernames = $playernames.$playername.",";
+			}
+			$playernames = substr($playernames,0,-1);
+
+			return
+				$gameid.";". //0
+				$boss.";". //1
+				$bosshealth.";". //2
+				$weather.";". //3
+				$bossmove.";". //4
+				$gamestate.";". //5
+				$name.";". //6
+				$health.";". //7
+				$strength.";". //8
+				$speed.";". //9
+				$playermove.";". //10
+				$playerstate.";". //11
+				$playernames; //12
 		}
 
 	//---whose turn---//

@@ -43,7 +43,7 @@
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: participant.html");
+			header("location: participant.html?game=".$gameid);
 		}
 
 	//---start game button---//
@@ -72,7 +72,7 @@
 
 			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";
 
-			header("location: main.html");
+			header("location: main.html?game=".$gameid);
 		}
 
 ?>
