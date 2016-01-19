@@ -30,7 +30,7 @@
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: leader.php?game=".$gameid);
+			header("location: leader.html?game=".$gameid);
 		}
 
 	//---join game button---//
@@ -39,11 +39,11 @@
 			$gameid = $_POST["joincode"];
 			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
 				
-			include("newplayer.php");
+			include("newplayer.html");
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: participant.php");
+			header("location: participant.html");
 		}
 
 	//---start game button---//
@@ -72,7 +72,7 @@
 
 			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";
 
-			header("location: main.php");
+			header("location: main.html");
 		}
 
 ?>
