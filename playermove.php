@@ -1,5 +1,7 @@
 <?php
 
+	include("config.php");
+
 	//---determine game & player---//
 		if(isset($_SESSION["player"])) {
 			$playerid = $_SESSION["playerid"];
@@ -16,18 +18,16 @@
 			}
 		}
 
-	//---determine move---//
-		if(isset($_POST["attack"])) {
-			include("attack.php");
-			$attack = attack($playerid);
-		}
-		elseif(isset($_POST["dodge"])) {
-			include("dodge.php"));
-			$dodge = dodge($playerid);
-		}
-		elseif(isset($_POST["rest"])) {
-			include("rest.php");
-			$rest = rest($playerid);
-		}
+		if(isset($_POST["playermove"])) {
+			$move = $_POST["playermove"];
 
+		//--submit move---//
+			$query1 = "UPDATE players SET playermove = ('$move') WHERE playerid = '$playerid' ";
+				mysql_query($query1) or die (mysql_error());
+
+			$query2 = "UPDATE players SET playerstate = ('waiting') WHERE playerid = '$playerid' ";
+				mysql_query($query2) or die (mysql_error());
+
+			include("status.php");
+		}
 ?>

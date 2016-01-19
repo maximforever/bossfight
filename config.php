@@ -7,4 +7,7 @@
 	$dbname = 'bossfightdb';
 		mysql_select_db($dbname);
 
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
 ?>
