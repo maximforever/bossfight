@@ -14,6 +14,7 @@
 		weather VARCHAR(255) NOT NULL,
 		bossmove VARCHAR(255) NOT NULL,
 		gamestate VARCHAR(255) NOT NULL,
+		roundcount INT(4) UNSIGNED ZEROFILL NOT NULL,
 		starttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		PRIMARY KEY(gameid)
 	)") or die (mysql_error());

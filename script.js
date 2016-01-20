@@ -43,27 +43,29 @@ function main(){
                     $("#bosshealth").empty();
                     $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[3]);
-                    $("#bossmove").empty();
-                    $("#bossmove").append(resultArray[4]);
+                    $("#weather").append(resultArray[3]);;
                     $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[5]);
+                    $("#gamestate").append(resultArray[4]);
+                    $("#roundcount").empty();
+                    $("#roundcount").append(resultArray[5]);
+                    $("#story").empty();
+                    //refreshStory(resultArray[6]);
 
                     $("#name").empty();
-                    $("#name").append(resultArray[6]);
+                    $("#name").append(resultArray[7]);
                     $("#health").empty();
-                    $("#health").append(resultArray[7]);
+                    $("#health").append(resultArray[8]);
                     $("#strength").empty();
-                    $("#strength").append(resultArray[8]);
+                    $("#strength").append(resultArray[9]);
                     $("#speed").empty();
-                    $("#speed").append(resultArray[9]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[10]);
+                    $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[12]);
 
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[12]);
+                    //refreshTeam(resultArray[13]);
                 }
             });
         });
@@ -86,27 +88,29 @@ function main(){
                     $("#bosshealth").empty();
                     $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[3]);
-                    $("#bossmove").empty();
-                    $("#bossmove").append(resultArray[4]);
+                    $("#weather").append(resultArray[3]);;
                     $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[5]);
+                    $("#gamestate").append(resultArray[4]);
+                    $("#roundcount").empty();
+                    $("#roundcount").append(resultArray[5]);
+                    $("#story").empty();
+                    //refreshStory(resultArray[6]);
 
                     $("#name").empty();
-                    $("#name").append(resultArray[6]);
+                    $("#name").append(resultArray[7]);
                     $("#health").empty();
-                    $("#health").append(resultArray[7]);
+                    $("#health").append(resultArray[8]);
                     $("#strength").empty();
-                    $("#strength").append(resultArray[8]);
+                    $("#strength").append(resultArray[9]);
                     $("#speed").empty();
-                    $("#speed").append(resultArray[9]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[10]);
+                    $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[12]);
 
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[12]);
+                    //refreshTeam(resultArray[13]);
             }});    
         }, 15000);
 
@@ -128,27 +132,29 @@ function main(){
                     $("#bosshealth").empty();
                     $("#bosshealth").append(resultArray[2]);
                     $("#weather").empty();
-                    $("#weather").append(resultArray[3]);
-                    $("#bossmove").empty();
-                    $("#bossmove").append(resultArray[4]);
+                    $("#weather").append(resultArray[3]);;
                     $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[5]);
+                    $("#gamestate").append(resultArray[4]);
+                    $("#roundcount").empty();
+                    $("#roundcount").append(resultArray[5]);
+                    $("#story").empty();
+                    //refreshStory(resultArray[6]);
 
                     $("#name").empty();
-                    $("#name").append(resultArray[6]);
+                    $("#name").append(resultArray[7]);
                     $("#health").empty();
-                    $("#health").append(resultArray[7]);
+                    $("#health").append(resultArray[8]);
                     $("#strength").empty();
-                    $("#strength").append(resultArray[8]);
+                    $("#strength").append(resultArray[9]);
                     $("#speed").empty();
-                    $("#speed").append(resultArray[9]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[10]);
+                    $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
+                    $("#playermove").empty();
+                    $("#playermove").append(resultArray[12]);
 
                     $("#team-list").empty();
-                    //refreshTeam(resultArray[12]);
+                    //refreshTeam(resultArray[13]);
                 }
             });
         }

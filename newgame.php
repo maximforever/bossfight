@@ -3,7 +3,7 @@
 	function new_game() {
 		$randomseed = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1,16))),0,16);
 
-		$query1 = "INSERT INTO games (boss, weather, gamestate) VALUES ('dragon','sunny','$randomseed')";
+		$query1 = "INSERT INTO games (boss, weather, gamestate, roundcount) VALUES ('dragon','sunny','$randomseed', 0)";
 			mysql_query($query1) or die (mysql_error());
 
 		$query2 = "SELECT * FROM games WHERE gamestate = '$randomseed' ";

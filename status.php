@@ -2,65 +2,40 @@
 
 	include("config.php");
 
-	if (session_status() == PHP_SESSION_NONE) {
-		session_start();
-	}
-
-	//---player screen---//
+	//---player or observer?---//
 		if((isset($_SESSION["playerid"])) and ($_SESSION["playerid"] > 0)) {
 			$playerid = $_SESSION["playerid"];
 			$query0 = "SELECT * FROM players WHERE playerid = '$playerid' ";
 				$recordset = mysql_query($query0) or die (mysql_error());
 				$row = mysql_fetch_array($recordset);
 			$gameid = $row["gameid"];
-
-		//---check whose turn it is---//
+		}
+		elseif(isset($_POST["game"]) {
+			$playerid = 0;
+			$gameid = $_POST["game"];
+		}
+	
+	//---check whose turn it is---//
+		if(isset($playerid) and isset($gameid)) {
 			$whoseturn = whose_turn($gameid);
+
 			if($whoseturn == "gameturn") {
 				include("gamemove.php");
 				$progress = game_move($gameid);
 
-				if($progress = "calculating") {
+				if($progress == "calculating") {
 					$gamestatus = game_status($playerid,$gameid);
 					echo $gamestatus; 
 				}
-				elseif($progrss = "complete") {
+				elseif($progress == "complete") {
 					$gamestatus = game_status($playerid,$gameid);
 					echo $gamestatus;
 				}
 			}
 		
-		//---send player status---//
-			else {
-				$gamestatus = game_status($playerid,$gameid);
-				echo $gamestatus;
-			}
-		}
-
-	//---observer screen---//
-		elseif(isset($_POST["game"])) {
-			$playerid = 0;
-			$gameid = $_POST["game"];
-
-		//---check whose turn it is---//
-			$whoseturn = whose_turn($gameid);
-			if($whoseturn == "gameturn") {
-				include("gamemove.php");
-				$progress = game_move($gameid);
-
-				if($progress = "calculating") {
-					$gamestatus = game_status($playerid,$gameid);
-					echo $gamestatus; 
-				}
-				elseif($progrss = "complete") {
-					$gamestatus = game_status($playerid,$gameid);
-					echo $gamestatus;
-				}
-			}
-
 		//---send game status---//
 			else {
-				$gamestatus = game_status(0,$gameid);
+				$gamestatus = game_status($playerid,$gameid);
 				echo $gamestatus;
 			}
 		}
@@ -76,8 +51,9 @@
 			$boss = $row["boss"];
 			$bosshealth = $row["bosshealth"];
 			$weather = $row["weather"];
-			$bossmove = $row["bossmove"];
+			$story = $row["bossmove"];
 			$gamestate = $row["gamestate"];
+			$roundcount = $row["roundcount"];
 			$arrayplayersid = explode(",",$row["players"]);
 				array_pop($arrayplayersid);
 
@@ -98,7 +74,7 @@
 				$arrayplayersid = array_diff($arrayplayersid,$arrayplayerid);
 			}
 			else {
-				$name = $boss;
+				$name = 0;
 				$health = 0;
 				$strength = 0;
 				$speed = 0;
@@ -128,15 +104,16 @@
 				$boss.";". //1
 				$bosshealth.";". //2
 				$weather.";". //3
-				$bossmove.";". //4
-				$gamestate.";". //5
-				$name.";". //6
-				$health.";". //7
-				$strength.";". //8
-				$speed.";". //9
-				$playermove.";". //10
-				$playerstate.";". //11
-				$playernames; //12
+				$gamestate.";". //4
+				$roundcount.";". //5
+				$story.";". //6
+				$name.";". //7
+				$health.";". //8
+				$strength.";". //9
+				$speed.";". //10
+				$playermove.";". //11
+				$playerstate.";". //12
+				$playernames; //13
 		}
 
 	//---whose turn---//

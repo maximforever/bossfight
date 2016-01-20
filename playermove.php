@@ -11,12 +11,6 @@
 
 			$gameid = $row["gameid"];
 		}
-		else {
-			$playerid = 0;
-			if(isset($_GET["game"])) {
-				$gameid = $_GET["game"];
-			}
-		}
 
 		if(isset($_POST["playermove"])) {
 			$move = $_POST["playermove"];

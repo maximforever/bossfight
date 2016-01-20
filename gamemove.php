@@ -1,6 +1,5 @@
 <?php
 
-	include("config.php");
 	include("bossmove.php");
 	include("attack.php");
 	include("bossattackone.php");
@@ -20,7 +19,7 @@
 			array_pop($arrayplayersid);
 		$bosshealth = $row["bosshealth"];
 		$boss = $row["boss"];
-
+		$roundcount = $row["roundcount"];
 		$weather = $row["weather"];
 
 		//---prevent duplicative gameturns---//
@@ -44,10 +43,10 @@
 				$raineffect = mt_rand(0,99);
 				$snoweffect = mt_rand(0,99);
 				if(($move == "attack") and ($weather == "rainy") and ($raineffect < 5)) {
-					$story = $story."Rain prevents ".$playerid."'s attack.,"; //story
+					$story = $story."Rain prevents @".$playerid."&'s attack.,"; //story
 				}
 				elseif(($move == "attack") and ($weather == "snowy") and ($snoweffect < 20)) {
-					$story = $story."Snow prevents ".$playerid."'s attack.,"; //story
+					$story = $story."Snow prevents @".$playerid."&'s attack.,"; //story
 				}
 				elseif($move == "attack") {
 					$attack = attack($playerid);
@@ -55,10 +54,10 @@
 					$windeffect = mt_rand(0,99);
 					if (($weather == "windy") and ($windeffect < 20)) {
 						$attack = ($attack * .8);
-						$story = $story."Wind reduces ".$playerid."'s attack to ".$attack." damage.,"; //story
+						$story = $story."Wind reduces @".$playerid."&'s attack to ".$attack." damage.,"; //story
 					}
 					else {
-						$story = $story.$playerid." attacks for ".$attack." damage.,"; //story
+						$story = $story."@".$playerid."& attacks for ".$attack." damage.,"; //story
 					}
 
 					$totalattack = $totalattack + $attack;
@@ -119,15 +118,15 @@
 				//---player dodges---//
 					$move = $row["playermove"];
 					if($move == "dodge") {
-						$story = $story.$target." dodges.,"; //story
+						$story = $story."@".$target."& dodges.,"; //story
 						$damage = ($damage - dodge($target));
 
 						if($damage < 0) {
 							$damage = 0;
-							$story = $story.$target." takes no damage.,"; //story
+							$story = $story."@".$target."& takes no damage.,"; //story
 						}
 						else {
-							$story = $story.$taget." takes ".$damage." damage from the ".$boss.".,"; //story
+							$story = $story."@".$taget."& takes ".$damage." damage from the ".$boss.".,"; //story
 						}
 					}
 
@@ -162,10 +161,10 @@
 
 							if($damage < 0) {
 								$damage = 0;
-								$story = $story.$target." takes no damage.,"; //story
+								$story = $story."@".$target."& takes no damage.,"; //story
 							}
 							else {
-								$story = $story.$target." takes ".$damage." damage from the ".$boss.".,"; //story
+								$story = $story."@".$target."& takes ".$damage." damage from the ".$boss.".,"; //story
 							}
 						}
 
@@ -187,7 +186,7 @@
 
 				if($move == "rest") {
 					rest($playerid);
-					$story = $story.$playerid." rests to recover health and strength and speed.,"; //story
+					$story = $story."@".$playerid."& rests to recover health and strength and speed.,"; //story
 				}
 			}
 
@@ -199,20 +198,42 @@
 			$query7 = "UPDATE games SET weather = ('$newweather') WHERE gameid = '$gameid' ";
 				mysql_query($query7) or die (mysql_error());
 
-		//---reset gamestate---//
-			foreach ($arrayplayersid as $playerid) {
-				$query8 = "UPDATE players SET playermove = ('') WHERE playerid = '$playerid' ";
-					mysql_query($query8) or die (mysql_error());
+		//---replace id numbers with names in story---//
+			if (strpos($story, "@") !== FALSE) {
+				$input = $story;
+				preg_match_all("~@(.*?)&~", $input, $output);
+				$arraytagged = $output[1];
+									
+				foreach($arraytagged as $taggedid) {
+					$query8 = "SELECT * FROM players WHERE playerid = '$taggedid'";
+					$recordset = mysql_query($query8) or die (mysql_error());
+					$row = mysql_fetch_array($recordset);
+					$name = $row["name"];
 
-				$query9 = "UPDATE players SET playerstate = ('ready') WHERE playerid = '$playerid' ";
-					mysql_query($query9) or die (mysql_error());
+					if(isset($name)) {
+						$story = str_replace("$taggedid", "$name", $story);
+					}
+				}
 			}
 
-			$query10 = "UPDATE games SET bossmove = ('$story') WHERE gameid = '$gameid' ";
-				mysql_query($query10) or die (mysql_error());
+		//---reset gamestate---//
+			foreach ($arrayplayersid as $playerid) {
+				$query9 = "UPDATE players SET playermove = ('') WHERE playerid = '$playerid' ";
+					mysql_query($query9) or die (mysql_error());
 
-			$query11 = "UPDATE games SET gamestate = ('ready') WHERE gameid = '$gameid' ";
+				$query10 = "UPDATE players SET playerstate = ('ready') WHERE playerid = '$playerid' ";
+					mysql_query($query10) or die (mysql_error());
+			}
+
+			$query11 = "UPDATE games SET bossmove = ('$story') WHERE gameid = '$gameid' ";
 				mysql_query($query11) or die (mysql_error());
+
+			$roundcount = $roundcount + 1;
+			$query12 = "UPDATE games SET roundcount = ('$roundcount') WHERE gameid = '$gameid' ";
+				mysql_query($query12) or die (mysql_error());
+
+			$query13 = "UPDATE games SET gamestate = ('ready') WHERE gameid = '$gameid' ";
+				mysql_query($query13) or die (mysql_error());
 
 			return "complete";
 		}

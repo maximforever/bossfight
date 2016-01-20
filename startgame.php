@@ -34,7 +34,7 @@
 		}
 
 	//---join game button---//
-		if(isset($_POST["joingame"])) {
+		elseif(isset($_POST["joingame"])) {
 			$name = $_POST["name"];
 			$gameid = $_POST["joincode"];
 			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
@@ -47,7 +47,7 @@
 		}
 
 	//---start game button---//
-		if(isset($_POST["startgame"]) and isset($_SESSION["playerid"])) {
+		elseif(isset($_POST["startgame"]) and isset($_SESSION["playerid"])) {
 			$query1 = "UPDATE games SET gamestate=('playerturn') WHERE gameid = '$gameid' ";
 				mysql_query($query1) or die (mysql_error());
 
@@ -73,6 +73,36 @@
 			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";
 
 			header("location: main.html?game=".$gameid);
+		}
+
+	//---quit game button---//
+		elseif(isset($_POST["quitgame"]) and isset($_SESSION["playerid"])) {
+			$playerid = $_SESSION["playerid"];
+			$query5 = "SELECT * FROM players WHERE playerid = '$playerid' ";
+				$recordset = mysql_query($query5) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+			$gameid = $row["gameid"];
+
+			$query6 = "DELETE FROM players WHERE playerid = '$playerid' AND gameid = '$gameid' ";
+				mysql_query($query6) or die (mysql_error());
+
+			$query7 = "SELECT * FROM games WHERE gameid = '$gameid' ";
+				$recordset = mysql_query($query7) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+			$players = $row["players"];
+
+			$players = str_replace($playerid.",","",$players);
+
+			if(empty($players)) {
+				$query8 = "DELETE FROM games WHERE gameid = '$gameid' ";
+					mysql_query($query8) or die (mysql_error());
+			}
+			else {
+				$query9 = "UPDATE games SET players = REPLACE(players,'$playerid,','') WHERE gameid = '$gameid' ";
+					mysql_query($query9) or die (mysql_error());
+			}
+
+			unset($_SESSION["playerid"]);
 		}
 
 ?>
