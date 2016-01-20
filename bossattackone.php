@@ -1,6 +1,6 @@
 <?php
 	
-	function boss_attack_one($arrayplayersid);
+	function boss_attack_one($arrayplayersid) {
 		$arraytargets = array("");
 			array_pop($arraytargets);
 
@@ -9,18 +9,19 @@
 				$recordset = mysql_query($query2) or die (mysql_error());
 				$row = mysql_fetch_array($recordset);
 			$health = $row["health"];
+			$arrayplayerid = array($playerid);
 
 			$x = 0;
 			while ($x < $health) {
-				$arraytargets = array_merge($arraytargets, $playerid);
-				$x + 1;
+				$arraytargets = array_merge($arraytargets, $arrayplayerid);
+				$x = $x + 1;
 			}
 		}
 
-		$randomtarget = array_rand($arraytargets, 1);
-		$target = $arraytargets($randomtarget[0]);
+		shuffle($arraytargets);
+		$target = $arraytargets[0];
 
-		$attack = 8;
+		$attack = mt_rand(2,10);
 
 		return $target.";".$attack;
 	}

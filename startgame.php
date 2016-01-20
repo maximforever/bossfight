@@ -48,6 +48,19 @@
 
 	//---start game button---//
 		elseif(isset($_POST["startgame"]) and isset($_SESSION["playerid"])) {
+			$gameid = start_game($gameid);
+			header("location: main.html?game=".$gameid);
+		}
+
+	//---quit game button---//
+		elseif(isset($_POST["quitgame"]) and isset($_SESSION["playerid"])) {
+			$playerid = $_SESSION["playerid"];
+			$_SESSION["playerid"] = quit_game($playerid);
+			unset($_SESSION["playerid"]);
+		}
+
+	//---function start_game---//
+		function start_game($gameid) {
 			$query1 = "UPDATE games SET gamestate=('playerturn') WHERE gameid = '$gameid' ";
 				mysql_query($query1) or die (mysql_error());
 
@@ -67,17 +80,17 @@
 			foreach($arrayplayersid as $playerid) {
 				$query3 = "UPDATE players SET playerstate =('playerturn') WHERE playerid = '$playerid' ";
 				mysql_query($query3) or die (mysql_error());
-				$bosshealth = $bosshealth + 30;
+				$bosshealth = $bosshealth + 50;
 			}
 
 			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";
+				mysql_query($query4) or die (mysql_error());
 
-			header("location: main.html?game=".$gameid);
+			return $gameid;
 		}
 
-	//---quit game button---//
-		elseif(isset($_POST["quitgame"]) and isset($_SESSION["playerid"])) {
-			$playerid = $_SESSION["playerid"];
+	//---function quit_game---//
+		function quit_game($playerid) {
 			$query5 = "SELECT * FROM players WHERE playerid = '$playerid' ";
 				$recordset = mysql_query($query5) or die (mysql_error());
 				$row = mysql_fetch_array($recordset);
@@ -102,7 +115,6 @@
 					mysql_query($query9) or die (mysql_error());
 			}
 
-			unset($_SESSION["playerid"]);
+			return $playerid;
 		}
-
 ?>

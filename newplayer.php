@@ -11,7 +11,7 @@
 			$row = mysql_fetch_array($recordset);
 			$playerid = $row["playerid"];
 
-		$query3 = "UPDATE players SET playerstate = ('waiting') WHERE playerid = '$playerid' AND playerstate = '$randomseed' ";
+		$query3 = "UPDATE players SET playerstate = ('setting up') WHERE playerid = '$playerid' AND playerstate = '$randomseed' ";
 			mysql_query($query3) or die (mysql_error());
 
 		$query4 = "UPDATE games SET players = CONCAT(players,'$playerid,') WHERE gameid = '$gameid' ";

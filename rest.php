@@ -9,9 +9,19 @@
 		$strength = $row["strength"];
 		$speed = $row["speed"];
 
-		$newhealth = $health + 4;
-		$newstrength = $strength + 4;
-		$newspeed = $speed + 4;
+		$newhealth = $health + mt_rand(1,5);
+		$newstrength = $strength + mt_rand(1,5);
+		$newspeed = $speed + mt_rand(1,5);
+
+		if($newhealth > 20) {
+			$newhealth = 20;
+		}
+		if($newstrength > 10) {
+			$newstrength = 10;
+		}
+		if($newspeed > 10) {
+			$newspeed = 10;
+		}
 
 	//---update stats---//
 		$query2 = "UPDATE players SET health = ('$newhealth') WHERE playerid = '$playerid' ";

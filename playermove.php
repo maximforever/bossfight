@@ -3,10 +3,10 @@
 	include("config.php");
 
 	//---determine game & player---//
-		if(isset($_SESSION["player"])) {
+		if(isset($_SESSION["playerid"])) {
 			$playerid = $_SESSION["playerid"];
 			$query0 = "SELECT * FROM players WHERE playerid = '$playerid' ";
-			$recordset = mysql_query($query1) or die (mysql_error());
+			$recordset = mysql_query($query0) or die (mysql_error());
 			$row = mysql_fetch_array($recordset);
 
 			$gameid = $row["gameid"];

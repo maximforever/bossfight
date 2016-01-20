@@ -10,7 +10,7 @@
 				$row = mysql_fetch_array($recordset);
 			$gameid = $row["gameid"];
 		}
-		elseif(isset($_POST["game"]) {
+		elseif(isset($_POST["game"])) {
 			$playerid = 0;
 			$gameid = $_POST["game"];
 		}
@@ -121,6 +121,7 @@
 			$query1 = "SELECT * FROM games WHERE gameid = '$gameid' ";
 				$recordset = mysql_query($query1) or die (mysql_query());
 				$row = mysql_fetch_array($recordset);
+			$gamestate = $row["gamestate"];
 
 			$arrayplayers = explode(",",$row["players"]);
 
@@ -137,7 +138,10 @@
 				$arrayplayerstates = array_merge($arrayplayerstates,$arrayplayerstate);
 			}
 
-			if(!in_array("playerturn", $arrayplayerstates)) {
+			if($gamestate == "setting up") {
+				return "setting up";
+			}
+			elseif(!in_array("playerturn", $arrayplayerstates)) {
 				return "gameturn";
 			}
 			else {

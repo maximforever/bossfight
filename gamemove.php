@@ -123,11 +123,14 @@
 
 						if($damage < 0) {
 							$damage = 0;
-							$story = $story."@".$target."& takes no damage.,"; //story
+							$story = $story."@".$target."& dodges the ".$boss."'s attack and takes no damage.,"; //story
 						}
 						else {
-							$story = $story."@".$taget."& takes ".$damage." damage from the ".$boss.".,"; //story
+							$story = $story."@".$target."& dodges the ".$boss."'s attack but takes ".$damage." damage.,"; //story
 						}
+					}
+					else {
+						$story = $story."The ".$boss." focuses an attack on @".$target."& for ".$damage." damage.,"; //story
 					}
 
 				//---player takes damage---//
@@ -138,6 +141,7 @@
 
 			//---attack all players---//
 				elseif ($bossmove == "attackall") {
+					$story = $story."The ".$boss." attacks everyone.,"; //story
 					$arraybossattack = explode(";",boss_attack_all($arrayplayersid));
 					$arraytargets = explode(",",$arraybossattack[0]);
 					$damage = $arraybossattack[1];
@@ -161,20 +165,25 @@
 
 							if($damage < 0) {
 								$damage = 0;
-								$story = $story."@".$target."& takes no damage.,"; //story
+								$story = $story."@".$target."& dodges the ".$boss."'s attack and takes no damage.,"; //story
 							}
 							else {
-								$story = $story."@".$target."& takes ".$damage." damage from the ".$boss.".,"; //story
+								$story = $story."@".$target."& dodges the ".$boss."'s attack but takes ".$damage." damage.,"; //story
 							}
+						}
+						else {
+							$story = $story."@".$target."& takes ".$damage." damage from the ".$boss." attack.,"; //story
 						}
 
 					//---player takes damage---//
 						$newhealth = ($currenthealth - $damage);
 						$query5 = "UPDATE players SET health = ('$newhealth') WHERE playerid = '$target' ";
 							mysql_query($query5) or die (mysql_error());
-						}
 					}
 				}
+			}
+			else {
+				$story = $story."The ".$boss." is defeated!,";
 			}
 
 		//---players rest---//
@@ -211,7 +220,7 @@
 					$name = $row["name"];
 
 					if(isset($name)) {
-						$story = str_replace("$taggedid", "$name", $story);
+						$story = str_replace("@$taggedid&", "$name", $story);
 					}
 				}
 			}
@@ -221,18 +230,19 @@
 				$query9 = "UPDATE players SET playermove = ('') WHERE playerid = '$playerid' ";
 					mysql_query($query9) or die (mysql_error());
 
-				$query10 = "UPDATE players SET playerstate = ('ready') WHERE playerid = '$playerid' ";
+				$query10 = "UPDATE players SET playerstate = ('playerturn') WHERE playerid = '$playerid' ";
 					mysql_query($query10) or die (mysql_error());
 			}
 
-			$query11 = "UPDATE games SET bossmove = ('$story') WHERE gameid = '$gameid' ";
+			$slashstory = addslashes($story);
+			$query11 = "UPDATE games SET bossmove = ('$slashstory') WHERE gameid = '$gameid' ";
 				mysql_query($query11) or die (mysql_error());
 
 			$roundcount = $roundcount + 1;
 			$query12 = "UPDATE games SET roundcount = ('$roundcount') WHERE gameid = '$gameid' ";
 				mysql_query($query12) or die (mysql_error());
 
-			$query13 = "UPDATE games SET gamestate = ('ready') WHERE gameid = '$gameid' ";
+			$query13 = "UPDATE games SET gamestate = ('playerturn') WHERE gameid = '$gameid' ";
 				mysql_query($query13) or die (mysql_error());
 
 			return "complete";

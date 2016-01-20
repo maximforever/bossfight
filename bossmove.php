@@ -3,7 +3,7 @@
 	function boss_move($gameid) {
 		$query1 = "SELECT * FROM games WHERE gameid = '$gameid' ";
 			$recordset = mysql_query($query1) or die (mysql_error());
-			$row = mysql_fetch_array($row);
+			$row = mysql_fetch_array($recordset);
 
 		$players = $row["players"];
 		$arrayplayersid = explode(",",$players);
@@ -26,7 +26,7 @@
 				$move = "attackone";
 			}
 
-		return $boss_attack;
+		return $move;
 	}
 
 ?>
