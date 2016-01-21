@@ -16,10 +16,10 @@
 			$move = $_POST["playermove"];
 
 		//--submit move---//
-			$query1 = "UPDATE players SET playermove = ('$move') WHERE playerid = '$playerid' ";
+			$query1 = "UPDATE players SET playermove = ('$move') WHERE playerid = '$playerid' AND playerstate = 'playerturn' ";
 				mysql_query($query1) or die (mysql_error());
 
-			$query2 = "UPDATE players SET playerstate = ('waiting') WHERE playerid = '$playerid' ";
+			$query2 = "UPDATE players SET playerstate = ('waiting') WHERE playerid = '$playerid' AND playerstate = 'playerturn' ";
 				mysql_query($query2) or die (mysql_error());
 
 			include("status.php");

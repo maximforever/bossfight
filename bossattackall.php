@@ -9,7 +9,7 @@
 
 		$target = substr($target,0,-1);
 
-		$attack = mt_rand(1,5);
+		$attack = mt_rand(number("boss_attack_one_min"),number("boss_attack_one_max"));
 
 		return $target.";".$attack;
 	}

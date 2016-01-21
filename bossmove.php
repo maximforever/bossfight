@@ -12,17 +12,17 @@
 		$randomnumber = mt_rand(0,99);
 
 		//---defend---//
-			if ($randomnumber < 20) {
+			if ($randomnumber < number("percentage_boss_dodge")) {
 				$move = "dodge";
 			}
 
 		//---attack all---//
-			elseif (($randomnumber > 19) and ($randomnumber < 70)) {
+			elseif (($randomnumber > (number("percentage_boss_dodge")-1)) and ($randomnumber < (number("percentage_boss_dodge") + number("percentage_boss_attack_all")))) {
 				$move = "attackall";
 			}
 		
 		//---attack one---//
-			elseif ($randomnumber > 69) {
+			elseif ($randomnumber > (99 - number("percentage_boss_attack_one"))) {
 				$move = "attackone";
 			}
 

@@ -14,9 +14,6 @@
 		$query2 = "UPDATE players SET speed = ('$newspeed') WHERE playerid = '$playerid' ";
 			mysql_query($query2) or die (mysql_error());
 
-		$query3 = "UPDATE players SET playerstate = ('gameturn') WHERE playerid = '$playerid' ";
-			mysql_query($query3) or die (mysql_error());
-
 		return $dodge;
 	}
 

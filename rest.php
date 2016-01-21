@@ -9,18 +9,18 @@
 		$strength = $row["strength"];
 		$speed = $row["speed"];
 
-		$newhealth = $health + mt_rand(1,5);
-		$newstrength = $strength + mt_rand(1,5);
-		$newspeed = $speed + mt_rand(1,5);
+		$newhealth = $health + mt_rand(number("rest_health_min"),number("rest_health_max"));
+		$newstrength = $strength + mt_rand(number("rest_strength_min"),number("rest_strength_max"));
+		$newspeed = $speed + mt_rand(number("rest_speed_min"),number("rest_speed_max"));
 
-		if($newhealth > 20) {
-			$newhealth = 20;
+		if($newhealth > number("starting_health")) {
+			$newhealth = number("starting_health");
 		}
-		if($newstrength > 10) {
-			$newstrength = 10;
+		if($newstrength > number("starting_strength")) {
+			$newstrength = number("starting_strength");
 		}
-		if($newspeed > 10) {
-			$newspeed = 10;
+		if($newspeed > number("starting_speed")) {
+			$newspeed = number("starting_speed");
 		}
 
 	//---update stats---//
@@ -32,12 +32,6 @@
 
 		$query4 = "UPDATE players SET speed = ('$newspeed') WHERE playerid = '$playerid' ";
 			mysql_query($query4) or die (mysql_error());
-
-		$query5 = "UPDATE players SET playerstate = ('gameturn') WHERE playerid = '$playerid' ";
-			mysql_query($query5) or die (mysql_error());
-
-		$rest = 4;
-		return $rest;
 	}
 
 ?>

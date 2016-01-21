@@ -3,7 +3,11 @@
 	function new_player($name, $gameid, $browserinfo) {
 		$randomseed = substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1,16))),0,16);
 
-		$query1 = "INSERT INTO players (name, gameid, health, strength, speed, playerstate, browserinfo) VALUES ('$name','$gameid','20','10','10','$randomseed','$browserinfo')";
+		$starting_health = number("starting_health");
+		$starting_strength = number("starting_strength");
+		$starting_speed = number("starting_speed");
+
+		$query1 = "INSERT INTO players (name, gameid, health, strength, speed, playerstate, browserinfo) VALUES ('$name','$gameid','$starting_health','$starting_speed','$starting_strength','$randomseed','$browserinfo')";
 			mysql_query($query1) or die (mysql_error());
 
 		$query2 = "SELECT * FROM players WHERE name = '$name' AND playerstate = '$randomseed' ";

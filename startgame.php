@@ -80,7 +80,7 @@
 			foreach($arrayplayersid as $playerid) {
 				$query3 = "UPDATE players SET playerstate =('playerturn') WHERE playerid = '$playerid' ";
 				mysql_query($query3) or die (mysql_error());
-				$bosshealth = $bosshealth + 50;
+				$bosshealth = $bosshealth + number("starting_boss_health_per_player");
 			}
 
 			$query4 = "UPDATE games SET bosshealth = ('$bosshealth') WHERE gameid = '$gameid' ";

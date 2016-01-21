@@ -21,7 +21,7 @@
 		shuffle($arraytargets);
 		$target = $arraytargets[0];
 
-		$attack = mt_rand(2,10);
+		$attack = mt_rand(number("boss_attack_one_min"),number("boss_attack_one_max"));
 
 		return $target.";".$attack;
 	}

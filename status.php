@@ -27,7 +27,15 @@
 					$gamestatus = game_status($playerid,$gameid);
 					echo $gamestatus; 
 				}
-				elseif($progress == "complete") {
+				elseif($progress == "continue") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus;
+				}
+				elseif($progress == "victory") {
+					$gamestatus = game_status($playerid,$gameid);
+					echo $gamestatus;
+				}
+				elseif($progress == "defeat") {
 					$gamestatus = game_status($playerid,$gameid);
 					echo $gamestatus;
 				}

@@ -5,6 +5,8 @@
 //---test database---//
 	if(isset($_POST["update_database"])) {
 		include("createdatabase.php");
+
+		echo "<br>database is up to date.";
 	}
 
 //---test new game---//
@@ -57,12 +59,12 @@
 			}
 
 			$_POST["game"] = $_POST["text_input"];
-			echo "<b>gameid; boss; bosshealth; weather; gamestate; roundcount; story; </b>6 zeros for player stats<b>; playernames</b><br>";
+			echo "<b>gameid; boss; bosshealth; weather; gamestate; roundcount; story; </b>6 zeros for player stats<b>; all players</b><br>";
 			include("status.php");
 			$_SESSION["playerid"] = $amnesia;
 		}
 		elseif(isset($_SESSION["playerid"])) {
-			echo "<b>gameid; boss; bosshealth; weather; gamestate; roundcount; story; name; health; strength; speed; playermove; playerstate; playernames</b><br>";
+			echo "<b>gameid; boss; bosshealth; weather; gamestate; roundcount; story; name; health; strength; speed; playermove; playerstate; other players</b><br>";
 			include("status.php");
 		}
 		else {
@@ -88,12 +90,16 @@
 				$_POST["playermove"] = "rest";
 				include("playermove.php");
 			}
+			elseif($_POST["text_input"] == "heal") {
+				$_POST["playermove"] = "heal";
+				include("playermove.php");
+			}
 			else {
-				echo "enter 'attack' or 'dodge' or 'rest'";
+				echo "enter 'attack' or 'dodge' or 'rest' ...or 'heal'";
 			}
 		}
 		else {
-			echo "enter 'attack' or 'dodge' or 'rest' ";
+			echo "enter 'attack' or 'dodge' or 'rest' ...or 'heal'";
 		}
 	}
 
@@ -101,6 +107,7 @@
 	elseif(isset($_POST["quit_game"])) {
 		include("startgame.php");
 		$_SESSION["playerid"] = quit_game($_SESSION["playerid"]);
+		echo $_SESSION["playerid"]." quit.";
 		unset($_SESSION["playerid"]);
 	}
 
