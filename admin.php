@@ -86,29 +86,30 @@
 				$_POST["playermove"] = "dodge";
 				include("playermove.php");
 			}
-			elseif($_POST["text_input"] == "rest") {
-				$_POST["playermove"] = "rest";
-				include("playermove.php");
-			}
 			elseif($_POST["text_input"] == "heal") {
 				$_POST["playermove"] = "heal";
 				include("playermove.php");
 			}
 			else {
-				echo "enter 'attack' or 'dodge' or 'rest' ...or 'heal'";
+				echo "enter 'attack' or 'dodge' or 'heal'";
 			}
 		}
 		else {
-			echo "enter 'attack' or 'dodge' or 'rest' ...or 'heal'";
+			echo "enter 'attack' or 'dodge' or 'heal'";
 		}
 	}
 
 //---test quitting game---//
 	elseif(isset($_POST["quit_game"])) {
-		include("startgame.php");
-		$_SESSION["playerid"] = quit_game($_SESSION["playerid"]);
-		echo $_SESSION["playerid"]." quit.";
-		unset($_SESSION["playerid"]);
+		if(isset($_SESSION["playerid"])) {
+			include("startgame.php");
+			$_SESSION["playerid"] = quit_game($_SESSION["playerid"]);
+			echo $_SESSION["playerid"]." quit.";
+			unset($_SESSION["playerid"]);
+		}
+		else {
+			echo "no active game to quit.";
+		}
 	}
 
 ?>

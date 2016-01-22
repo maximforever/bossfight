@@ -101,27 +101,7 @@
 					return .8;
 				}
 
-			//rest
-				elseif ($n == "rest_health_min") {
-					return 1;
-				}
-				elseif ($n == "rest_health_max") {
-					return 5;
-				}
-				elseif ($n == "rest_strength_min") {
-					return 1;
-				}
-				elseif ($n == "rest_strength_max") {
-					return 5;
-				}
-				elseif ($n == "rest_speed_min") {
-					return 1;
-				}
-				elseif ($n == "rest_speed_max") {
-					return 5;
-				}
-
-			//heal - not currently active, but would replace rest to add to the co-op
+			//heal
 				elseif ($n == "heal_health_min") {
 					return 1;
 				}

@@ -5,7 +5,6 @@
 	include("bossattackone.php");
 	include("bossattackall.php");
 	include("dodge.php");
-	include("rest.php");
 	include("heal.php");
 	include("changeweather.php");
 
@@ -190,20 +189,7 @@
 				$endgame = "victory";
 			}
 
-		//---players rest---//
-			foreach ($arrayplayersid as $playerid) {
-				$query10 = "SELECT * FROM players WHERE playerid = '$playerid' ";
-					$recordset = mysql_query($query10) or die (mysql_error());
-					$row = mysql_fetch_array($recordset);
-				$move = $row["playermove"];
-
-				if($move == "rest") {
-					rest($playerid);
-					$story = $story."@".$playerid."& rests to recover health and strength and speed.,"; //story
-				}
-			}
-
-		//---players heal---// - not currently active, but would replace rest to add to the co-op
+		//---players heal---//
 			foreach ($arrayplayersid as $playerid) {
 				$query10 = "SELECT * FROM players WHERE playerid = '$playerid' ";
 					$recordset = mysql_query($query10) or die (mysql_error());

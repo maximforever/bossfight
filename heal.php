@@ -15,9 +15,9 @@
 		$arrayplayerid = array($playerid);
 		$arraytargetsid = array_diff($arraytargetsid, $arrayplayerid);
 
-		$healhealth = mt_rand(number("rest_health_min"),number("rest_health_max"));
-		$healstrength = mt_rand(number("rest_strength_min"),number("rest_strength_max"));
-		$healspeed = mt_rand(number("rest_speed_min"),number("rest_speed_max"));
+		$healhealth = mt_rand(number("heal_health_min"),number("heal_health_max"));
+		$healstrength = mt_rand(number("heal_strength_min"),number("heal_strength_max"));
+		$healspeed = mt_rand(number("heal_speed_min"),number("heal_speed_max"));
 
 	//---heal targets---//
 		foreach($arraytargetsid as $targetid) {
