@@ -13,7 +13,9 @@ function main(){
     });
 }
 
-//---I'm not sure how to fix it, but the console keeps giving me an error when this function is active. I think it's missing a parenthesis or something.
+//I'm not sure how to fix it, 
+//but the console keeps giving me an error when this function is active. 
+//I think it's missing a parenthesis or something.
 
 //function refreshTeam(teamArray){
 //    var comrades = teamArray.split(",");
@@ -25,9 +27,25 @@ function main(){
 //}
 
 //---ajax---//
-    //---initial load---//
+    //---get---// //this function turns url parameters into GET('variables')
+        var GET = function GET(index) {
+            var urlquery = decodeURIComponent(window.location.search.substring(1)),
+                urlvariables = urlquery.split('&'),
+                index,
+                i;
+
+            for (i = 0; i < urlvariables.length; i++) {
+                urlparameter = urlvariables[i].split('=');
+
+                if (urlparameter[0] === index) {
+                    return urlparameter[1] === undefined ? true : urlparameter[1];
+                }
+            }
+        };
+
+    //---initial load---// //on load, this function GETs the game id (if set) and returns status items
         $(document).ready(function(){
-            data = 'game='+ gameid; //How do we get this gameid from the front-end?
+            data = "game=" + GET("game");
 
             $.ajax({
                 url: "status.php",
@@ -61,8 +79,8 @@ function main(){
                     $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[12]);
+                    $("#playerstate").empty();
+                    $("#playerstate").append(resultArray[12]);
 
                     $("#team-list").empty();
                     //refreshTeam(resultArray[13]);
@@ -71,8 +89,8 @@ function main(){
         });
 
     //---count refresh---//
-        setInterval(function(){ 
-            data = 'game='+ gameid; //How do we get this gameid from the front-end?
+        setInterval(function(){ //every 15 seconds, this function GETs the game id (if set) and returns status items
+            data = "game=" + GET("game");
 
             $.ajax({
                 url: "status.php",
@@ -106,17 +124,17 @@ function main(){
                     $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[12]);
+                    $("#playerstate").empty();
+                    $("#playerstate").append(resultArray[12]);
 
                     $("#team-list").empty();
                     //refreshTeam(resultArray[13]);
             }});    
         }, 15000);
 
-    //---playermove ajax---//
+    //---playermove ajax---// //this function POSTs the id of button presses and return status items
         function playermove(button) {
-            data = 'playermove='+button; //how do we get the id of the button that was clicked?
+            data = "playermove=" + button; //how do we get the id of the button that was clicked?
 
             $.ajax({
                 url: "playermove.php",
@@ -150,8 +168,8 @@ function main(){
                     $("#speed").append(resultArray[10]);
                     $("#playermove").empty();
                     $("#playermove").append(resultArray[11]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[12]);
+                    $("#playerstate").empty();
+                    $("#playerstate").append(resultArray[12]);
 
                     $("#team-list").empty();
                     //refreshTeam(resultArray[13]);
