@@ -33,7 +33,24 @@ function updateStory(array){
     }
 };
 
+function updateTeam(array){
+
+    var teamSize = $("#team-list li").length;
+
+    console.log("Actual Teammates:" + array.length);
+    $("#team-list").empty();
+    team = array.split(",");
+    for(var i = 0 ; i < team.length; i++){
+        console.log(team[i]);
+        $('#team-list').append("<li>" + team[i] +"</li>");
+    }
+};
+
+
 function refresh(result) {
+
+
+    console.log();
     var resultArray = result.split(";");
     console.log("REFRESHING. Current round: " + resultArray[5]);
 
@@ -77,6 +94,7 @@ function refresh(result) {
 
     //refresh buttons:
     updateStory(resultArray[6]);
+    updateTeam(resultArray[13]);
 
     //redirect to "dead" screen if the player is dead:
 

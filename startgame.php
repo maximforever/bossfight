@@ -39,7 +39,7 @@
 			$gameid = $_POST["joincode"];
 			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
 				
-			include("newplayer.html");
+			include("newplayer.php");
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
