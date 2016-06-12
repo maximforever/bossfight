@@ -5,21 +5,62 @@ currentRound = 0;
 function main(){
 
     console.log("jQuery is up!");
+    resetButtons();
 
-    $(".active").click(function(){
-        console.log("clicked!");
-        $(".active").addClass("inactive");
-        $(".active").removeClass("selected");
-        $(this).removeClass("inactive");
-        $(this).addClass("selected");
-    });
+    
 }
 
-var this_round = 0;
+   $("#undo").click(function(){
+    console.log("Undoing!");
+        resetButtons();
+   });
 
-function unclickAllButtons() {
-    $(".inactive").removeClass("inactive");
-    $(".active").removeClass("selected");
+// ------------------
+
+
+
+var this_round = 0;
+var full_boss_health;
+var full_user_health;
+
+
+function setHealth(result) {
+    
+    var resultArray = result.split(";");
+    full_boss_health = resultArray[2];
+    full_user_health = resultArray[8];
+    console.log(resultArray);
+    console.log("Setting the initial boss health at: " + full_boss_health);
+    console.log("Setting the initial user health at: " + full_user_health);
+
+
+}
+
+
+function resetButtons() {                                          // this function sets up all the main action-banner actions
+    $(".action-banner").css('margin-left', '-15%');
+    $("#attack").attr('src', 'assets/banner-red.png');
+    $("#dodge").attr('src', 'assets/banner-yellow.png');
+    $("#rest").attr('src', 'assets/banner-green.png');
+
+    $(".action-banner").hover(                              // this gives the banner buttons sexy styling
+        function(){
+            console.log("entering");
+            new Audio("assets/swoosh.mp3").play();          // this plays our swoosh sound
+            $(this).css('margin-left', '0%');
+
+        }, function(){
+            console.log("leaving");
+            $(this).css('margin-left', '-15%');
+        }
+    ); 
+
+    $(".action-banner").click(function(){                   // on click, we select one 
+        console.log("clicked!");
+        $(".action-banner").not(this).attr('src', 'assets/banner-inactive.png');
+        $(".action-banner").off('click mouseenter mouseleave');          // this unbinds all hover and click effects        
+        
+    });
 };
 
 function updateStory(array){
@@ -32,6 +73,21 @@ function updateStory(array){
         $('#story').append("<p>"+story[i] +"</p>");
     }
 };
+
+
+function updateBossHealth(boss_health){
+    console.log("updating boss health");
+    console.log(boss_health + "/" + full_boss_health);
+    $("#boss-health-bar").css("width", boss_health/full_boss_health * $( window ).width());
+}
+
+function updateUserHealth(user_health){
+    console.log("updating user health");
+    console.log(user_health + "/" + full_user_health);
+    $("#user-health-bar").css("width", user_health/full_user_health * $( window ).width());
+}
+
+
 
 function updateTeam(array){
 
@@ -49,8 +105,6 @@ function updateTeam(array){
 
 function refresh(result) {
 
-
-    console.log();
     var resultArray = result.split(";");
     console.log("REFRESHING. Current round: " + resultArray[5]);
 
@@ -65,8 +119,8 @@ function refresh(result) {
     $("#gameid").append(resultArray[0]);
     $("#boss").empty();
     $("#boss").append(resultArray[1]);
-    $("#bosshealth").empty();
-    $("#bosshealth").append(resultArray[2]);
+    $("#boss_health").empty();
+    $("#boss_health").append(resultArray[2]);
     $("#weather").empty();
     $("#weather").append(resultArray[3]);;
     $("#gamestate").empty();
@@ -78,8 +132,8 @@ function refresh(result) {
 
     $("#name").empty();
     $("#name").append(resultArray[7]);
-    $("#health").empty();
-    $("#health").append(resultArray[8]);
+    $("#user_health").empty();
+    $("#user_health").append(resultArray[8]);
     $("#strength").empty();
     $("#strength").append(resultArray[9]);
     $("#speed").empty();
@@ -95,6 +149,9 @@ function refresh(result) {
     //refresh buttons:
     updateStory(resultArray[6]);
     updateTeam(resultArray[13]);
+    console.log("Boss:" + resultArray[1]);
+    updateBossHealth(resultArray[2]);
+    updateUserHealth(resultArray[8]);
 
     //redirect to "dead" screen if the player is dead:
 
@@ -131,13 +188,14 @@ function refresh(result) {
                 cache: false,
                 success: function(result) {
                     console.log("initial load");
+                    setHealth(result);
                     refresh(result);
                 }
             });
         });
 
     //---count refresh---//
-        setInterval(function(){ //every 15 seconds, this function GETs the game id (if set) and returns status items
+        setInterval(function(){ //every 15 (changed to 3) seconds, this function GETs the game id (if set) and returns status items
             data = "game=" + GET("game");
 
             $.ajax({

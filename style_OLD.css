@@ -1,0 +1,263 @@
+/* GLOBAL */
+
+body {
+    background: rgba(155, 63, 0, 1);
+    font-family: 'Fondamento', cursive;
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.active {
+    color: black;
+    width: 300px;
+    height: 80px;
+    font-size: 20px;
+    padding: 20px;
+    background: #FF9A53;
+    border: none;
+    outline: none;
+    margin: 0px;
+}
+
+.active:hover {
+    background: #E65F00;
+    border: none;
+    color: white;
+}
+
+.inactive {
+    background: #b1b1b1;
+}
+
+
+.selected {
+    background-color: #FF6A00;
+    border: 6px solid #401a00;
+}
+
+.selected:hover {
+    background-color: #FF6A00;
+    color: black;
+    border: 6px solid #401a00;
+}
+
+
+
+
+/* HEADER */
+
+.header {
+    background: rgba(64, 26, 0, 0.8);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    img {
+        max-height: 30px;
+    }
+}
+
+
+.header .logo {
+    max-height: 80px;
+    border: 2px solid #e5d631;
+    margin-left: 3%;
+}
+
+.dragon-hp {
+    margin-right: 3%;
+    margin-top: 0px;
+    color: black;
+    float: right;
+    text-align: right;
+}
+
+.dragon-hp h3 {
+    display: inline;
+    margin: 0px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: #852a0e;
+    border: 2px solid #6EF300;
+    height: 80px; 
+    color: #6EF300;
+    font-size: 30px;
+    font-family: 'Antic Didone', serif;
+}
+
+/* MAIN */
+.main {
+    text-align: center;
+}
+
+.main-spacing {
+    height: 10%;
+}
+
+
+.main h3{
+    font-size: 40px;
+    color: #6EF300;
+}
+
+.main h5{
+    font-size: 20px;
+    color: black;
+}
+
+.main input[type="text"] {
+    width: 240px;
+    height: 60px;
+    font-size: 30px;
+}
+
+/* MAIN - PLAYER STATS */
+
+.player-stats {
+    padding: 20px 0px 20px 0px;
+    font-size: 30px;
+    color: #6EF300;
+    border: 2px solid black;
+    margin-bottom: 50px;
+}
+
+.stat {
+    font-family: 'Antic Didone', serif;
+    color: #4CE8D3;
+}
+
+/* MAIN - PLAYER CHOICE BUTTONS */
+
+.player-choices {
+
+}
+
+.player-choices button {
+    margin: 0px 10px 0px 10px;
+    width: 30%;
+}
+
+.story {
+    border: 1px solid black;
+    margin-bottom: 10px;
+    font-family: Arial;
+    color: #6EF300;
+}
+
+
+/* MAIN - TEAM INFORMATION */
+
+.team-heading {
+    font-family: 'Antic Didone', serif;
+    color: black;
+    
+}
+
+.team-heading{
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    text-decoration: underline;
+}
+li {
+    font-size: 16px;
+    text-align: left;
+    list-style-type: none;
+}
+
+/* JUMBOTRON */
+
+.jumbotron {
+    height: 30%;
+    background: url("assets/dragon.png");
+    background-size: cover;
+    background-position: 50% 20%; 
+
+}
+
+/* WAITING TO JOIN PAGE */
+
+.waiting-to-join {
+    text-align: left;
+    height: 50%;
+}
+
+.waiting-to-join h3 {
+    font-size: 40px;
+    text-decoration: underline;
+    margin-top: 0px;
+}
+
+.waiting-to-join ul{
+    padding: 0px;
+}
+
+.waiting-to-join ul li {
+    text-align: left;   
+    font-size: 20px;
+    color: black;
+}
+
+.join-code {
+    background: #852a0e;
+    border: 2px solid #6EF300;
+    color: #6EF300;
+    font-size: 30px;
+    font-family: 'Antic Didone', serif;
+    text-align: center;
+}
+
+.join-code h3 {
+    font-family: 'Antic Didone', serif;
+    color: #6EF300;
+    font-size: 30px;
+    text-decoration: none;
+    margin: 0px;
+}
+
+.waiting .container {
+
+    text-align: center;
+}
+
+.waiting h3 {
+    text-align: center;
+    display: block;
+    color: black;
+    font-size: 30px;
+    padding: 20px;
+    background: rgba(177,177,177, 0.5);
+    border: none;
+    outline: none;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+/* WIN - LOSE PAGES */
+
+
+.endgame {
+    margin-top: 20%;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px;
+}
+
+.win {
+    color: #00F610;
+    border: 4px solid #00F610;
+}
+
+.lose {
+    color: #ffea04;
+    border: 4px solid #ffea04;
+}
+
+
