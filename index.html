@@ -1,58 +1,51 @@
 <HTML>
 
     <HEAD>
-        <link rel = "stylesheet" type = "html/css" href ="assets/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=Fondamento:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Antic+Didone' rel='stylesheet' type='text/css'>
 
-        <link rel = "stylesheet" type = "html/css" href ="style.css">
+        <link rel = "stylesheet" href ="assets/bootstrap.min.css">
+        <link rel="stylesheet" href = "style.css">
+
+        <title>Welcome to Boss Fight</title>
     </HEAD>
 
-    <BODY>
+    <BODY class = "brown">
 
-    <div class = "header">
-        <div class = "row">
-            <div class = "col-md-3"> 
-                <img class = "logo" src = "assets/logo.png"></div><img>
+        <div class = "header">
+            <div class = "row">
+                <div class = "col-md-3"> 
+                    <img class = "logo" src = "assets/logo.png"></div><img>
+                </div>
+                <div class = "col-md-9 dragon-stats">
+
+                </div>
             </div>
-            <div class = "col-md-9 dragon-stats">
+        </div>
 
+        <div class = "main">
+            <div class= "container">
+                <div class = "main-spacing"></div>
+                <h3>Welcome to ye olde Boss Fight!</h3>
+                <br>
+                <br>
+                <form action="startgame.php" method="post">
+                    <h5>Thine name, stranger:</h5>
+                    <input type = "text" name="name"></input>
+                    <br>
+                    <br>
+                    <h5>Or provide thine key, friend:</h5>
+                    <input type = "text" name="joincode"></input>
+                    <br>
+                    <br>
+                    <button class = "join-game active-btn" name="joingame">Join Game</button>
+                    <br>
+                    <br>
+                    <button class = "create-game active-btn" name="creategame">Create Game</button>
+                </form>
             </div>
         </div>
-    </div>
-
-<!--     
-    <div class = "jumbotron">
-        <div class= "container">
-        </div>
-    </div> 
--->
-
-    <div class = "main">
-        <div class= "container">
-            <div class = "main-spacing"></div>
-            <h3>Welcome to ye olde Boss Fight!</h3>
-            <br>
-            <br>
-            <form action="startgame.php" method="post">
-                <h5>Thine name, stranger:</h5>
-                <input type = "text" name="name"></input>
-                <br>
-                <br>
-                <h5>Or provide thine key, friend:</h5>
-                <input type = "text" name="joincode"></input>
-                <br>
-                <br>
-                <button class = "join-game active" name="joingame">Join Game</button>
-                <br>
-                <br>
-                <button class = "create-game active" name="creategame">Create Game</button>
-            </form>
-        </div>
-    </div>
         
-
-
-
 
     </BODY>
 

@@ -1,30 +1,171 @@
 $(document).ready(main());
 
+currentRound = 0;
+
 function main(){
 
     console.log("jQuery is up!");
+    resetButtons();
 
-    $(".active").click(function(){
-        console.log("clicked!");
-        $(".active").addClass("inactive");
-        $(this).removeClass("inactive");
-        $(this).addClass("selected");
-
-    });
+    
 }
 
-//I'm not sure how to fix it, 
-//but the console keeps giving me an error when this function is active. 
-//I think it's missing a parenthesis or something.
+   $("#undo").click(function(){
+    console.log("Undoing!");
+        resetButtons();
+   });
 
-//function refreshTeam(teamArray){
-//    var comrades = teamArray.split(",");
-//    if(comrades.length > 0){
-//        for (var i = 0; i < comrades.length; i++){
-//            $("#team-list").append('<li><' + comrades[i] '/li>');
-//        }
-//    }
-//}
+// ------------------
+
+
+// ------------------
+
+
+var this_round = 0;
+var full_boss_health;
+var full_user_health;
+
+
+function setHealth(result) {
+    
+    var resultArray = result.split(";");
+    full_boss_health = resultArray[2];
+    full_user_health = resultArray[8];
+    console.log(resultArray);
+    console.log("Setting the initial boss health at: " + full_boss_health);
+    console.log("Setting the initial user health at: " + full_user_health);
+
+
+}
+
+
+function resetButtons() {                                          // this function sets up all the main action-banner actions
+    $(".action-holder").css('margin-left', '-8%');
+    $("#attack").attr('src', 'assets/banner-red.png');
+    $("#dodge").attr('src', 'assets/banner-yellow.png');
+    $("#rest").attr('src', 'assets/banner-green.png');
+
+    $(".action-holder").hover(                              // this gives the banner buttons sexy styling
+        function(){
+            console.log("entering");
+            new Audio("assets/swoosh.mp3").play();          // this plays our swoosh sound
+            $(this).css('margin-left', '0%');
+
+        }, function(){
+            console.log("leaving");
+            $(this).css('margin-left', '-8%');
+        }
+    ); 
+
+    $(".action-banner").click(function(){                   // on click, we select one 
+        console.log("clicked!");
+        $(".action-banner").not(this).attr('src', 'assets/banner-inactive.png');
+        $(".action-holder").off('click mouseenter mouseleave');          // this unbinds all hover and click effects        
+        
+    });
+};
+
+function updateStory(array){
+    if (array == ""){
+        array = "The sun shines overhead";
+    }
+    $("#story").empty();
+    story = array.split(",");
+    for(var i = 0 ; i < story.length; i++){
+        $('#story').append("<p>"+story[i] +"</p>");
+    }
+};
+
+
+function updateBossHealth(boss_health){
+    console.log("updating boss health");
+    console.log(boss_health + "/" + full_boss_health);
+    $("#boss-alive").css("width", boss_health/full_boss_health * $( window ).width());
+    $("#boss-dead").css("width", (1-boss_health/full_boss_health) * $( window ).width());
+}
+
+function updateUserHealth(user_health){
+    console.log("updating user health");
+    console.log(user_health + "/" + full_user_health);
+
+    $("#full_user_health").empty().append(full_user_health);
+
+    $("#user-alive").css("width", user_health/full_user_health * $( window ).width());
+    $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );
+}
+
+
+
+function updateTeam(array){
+
+    var teamSize = $("#team-list li").length;
+
+    console.log("Actual Teammates:" + array.length);
+    $("#team-list").empty();
+    team = array.split(",");
+    for(var i = 0 ; i < team.length; i++){
+        console.log(team[i]);
+        $('#team-list').append("<li class = 'team-mate'>" + team[i] +"</li>");
+    }
+};
+
+
+function refresh(result) {
+
+    var resultArray = result.split(";");
+    console.log("REFRESHING. Current round: " + resultArray[5]);
+
+    if(resultArray[8] <= 0){
+        resultArray[8] = 0; //this is a temporary fix. for some reason, health keeps decreasing below 0;
+        console.log("aw, sheet, you dead.");
+        $(window).attr("location","http://localhost/bossfight/lose.html");      //this redirects us to the lose page.
+    }
+
+
+    $("#gameid").empty();
+    $("#gameid").append(resultArray[0]);
+    $("#boss").empty();
+    $("#boss").append(resultArray[1]);
+    $("#boss_health").empty();
+    $("#boss_health").append(resultArray[2]);
+    $("#weather").empty();
+    $("#weather").append(resultArray[3]);;
+    $("#gamestate").empty();
+    $("#gamestate").append(resultArray[4]);
+    $("#roundcount").empty();
+    $("#roundcount").append(resultArray[5]);
+    $("#story").empty();
+    //refreshStory(resultArray[6]);
+
+    $("#name").empty();
+    $("#name").append(resultArray[7]);
+    $("#user_health").empty();
+    $("#user_health").append(resultArray[8]);
+    $("#strength").empty();
+    $("#strength").append(resultArray[9]);
+    $("#speed").empty();
+    $("#speed").append(resultArray[10]);
+    $("#playermove").empty();
+    $("#playermove").append(resultArray[11]);
+    $("#playerstate").empty();
+    $("#playerstate").append(resultArray[12]);
+
+    $("#team-list").empty();
+    //refreshTeam(resultArray[13]);
+
+    //refresh buttons:
+    updateStory(resultArray[6]);
+    updateTeam(resultArray[13]);
+    console.log("Boss:" + resultArray[1]);
+    updateBossHealth(resultArray[2]);
+    updateUserHealth(resultArray[8]);
+
+    //redirect to "dead" screen if the player is dead:
+
+
+}
+
+
 
 //---ajax---//
     //---get---// //this function turns url parameters into GET('variables')
@@ -53,43 +194,15 @@ function main(){
                 data: data,
                 cache: false,
                 success: function(result) {
-                    var resultArray = result.split(";");
-                    $("#gameid").empty();
-                    $("#gameid").append(resultArray[0]);
-                    $("#boss").empty();
-                    $("#boss").append(resultArray[1]);
-                    $("#bosshealth").empty();
-                    $("#bosshealth").append(resultArray[2]);
-                    $("#weather").empty();
-                    $("#weather").append(resultArray[3]);;
-                    $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[4]);
-                    $("#roundcount").empty();
-                    $("#roundcount").append(resultArray[5]);
-                    $("#story").empty();
-                    //refreshStory(resultArray[6]);
-
-                    $("#name").empty();
-                    $("#name").append(resultArray[7]);
-                    $("#health").empty();
-                    $("#health").append(resultArray[8]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[9]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[10]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[11]);
-                    $("#playerstate").empty();
-                    $("#playerstate").append(resultArray[12]);
-
-                    $("#team-list").empty();
-                    //refreshTeam(resultArray[13]);
+                    console.log("initial load");
+                    setHealth(result);
+                    refresh(result);
                 }
             });
         });
 
     //---count refresh---//
-        setInterval(function(){ //every 15 seconds, this function GETs the game id (if set) and returns status items
+        setInterval(function(){ //every 15 (changed to 3) seconds, this function GETs the game id (if set) and returns status items
             data = "game=" + GET("game");
 
             $.ajax({
@@ -98,39 +211,9 @@ function main(){
                 data: data,
                 cache: false, 
                 success: function(result) {
-                    var resultArray = result.split(";");
-                    $("#gameid").empty();
-                    $("#gameid").append(resultArray[0]);
-                    $("#boss").empty();
-                    $("#boss").append(resultArray[1]);
-                    $("#bosshealth").empty();
-                    $("#bosshealth").append(resultArray[2]);
-                    $("#weather").empty();
-                    $("#weather").append(resultArray[3]);;
-                    $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[4]);
-                    $("#roundcount").empty();
-                    $("#roundcount").append(resultArray[5]);
-                    $("#story").empty();
-                    //refreshStory(resultArray[6]);
-
-                    $("#name").empty();
-                    $("#name").append(resultArray[7]);
-                    $("#health").empty();
-                    $("#health").append(resultArray[8]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[9]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[10]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[11]);
-                    $("#playerstate").empty();
-                    $("#playerstate").append(resultArray[12]);
-
-                    $("#team-list").empty();
-                    //refreshTeam(resultArray[13]);
+                    refresh(result);
             }});    
-        }, 15000);
+        }, 3000);          //changed do 3 secs for ease of testing
 
     //---playermove ajax---// //this function POSTs the id of button presses and return status items
         function playermove(button) {
@@ -142,37 +225,7 @@ function main(){
                 data: data,
                 cache: false,
                 success: function(result) {
-                    var resultArray = result.split(";");
-                    $("#gameid").empty();
-                    $("#gameid").append(resultArray[0]);
-                    $("#boss").empty();
-                    $("#boss").append(resultArray[1]);
-                    $("#bosshealth").empty();
-                    $("#bosshealth").append(resultArray[2]);
-                    $("#weather").empty();
-                    $("#weather").append(resultArray[3]);;
-                    $("#gamestate").empty();
-                    $("#gamestate").append(resultArray[4]);
-                    $("#roundcount").empty();
-                    $("#roundcount").append(resultArray[5]);
-                    $("#story").empty();
-                    //refreshStory(resultArray[6]);
-
-                    $("#name").empty();
-                    $("#name").append(resultArray[7]);
-                    $("#health").empty();
-                    $("#health").append(resultArray[8]);
-                    $("#strength").empty();
-                    $("#strength").append(resultArray[9]);
-                    $("#speed").empty();
-                    $("#speed").append(resultArray[10]);
-                    $("#playermove").empty();
-                    $("#playermove").append(resultArray[11]);
-                    $("#playerstate").empty();
-                    $("#playerstate").append(resultArray[12]);
-
-                    $("#team-list").empty();
-                    //refreshTeam(resultArray[13]);
+                    refresh(result);
                 }
             });
         }

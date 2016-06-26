@@ -23,8 +23,8 @@
 
 			//starting
 				elseif ($n == "starting_health") {
-					return 20;
-				}
+					return 100;			/* CHANGED to 100 for testing, shoud be 20*/
+				}	
 				elseif ($n == "starting_strength") {
 					return 10;
 				}

@@ -1,13 +1,16 @@
 <HTML>
 
     <HEAD>
-        <link rel = "stylesheet" type = "html/css" href ="assets/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=Fondamento:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Antic+Didone' rel='stylesheet' type='text/css'>
 
-        <link rel = "stylesheet" type = "html/css" href ="style.css">
+        <link rel = "stylesheet" href ="assets/bootstrap.min.css">
+        <link rel="stylesheet" href = "style.css">
+
+        <title>Leader will launch</title>   
     </HEAD>
 
-    <BODY>
+    <BODY class = "brown">
 
     <div class = "header">
         <div class = "row">
@@ -33,12 +36,11 @@
             <div class = "row">
                 <div class = "col-md-8">
                     <h3>Other Players:</h3>
-                    <ul>
-                        <li id="#">One</li>
-                        <li id="#">Two</li>
-                        <li id="#">Three</li>
-                        <li id="#"></li>
-                        <li id="#"></li>
+                    <ul class = "waiting teammates" id = "team-list">
+                        
+
+                            <!-- Team goes here -->
+
                     </ul>
                 </div>
 
@@ -46,7 +48,7 @@
                     <div class = "join-code">
                         <h3>Join Key:
                             <br>
-                            <span class = "stat" id = "#">SOME CODE HERE</span>
+                            <span class = "stat" id = "gameid">SOME CODE HERE</span>
                         </h3>
                     </div>
                 </div>
@@ -54,13 +56,14 @@
 
         </div>
     </div>
-    <div class = "waiting">
+    <div>
         <div class = "container">
-            <h3>Waiting for thine compatriots to join</h3>
+            <h3 class = "waiting-sign">Waiting for thine compatriots to join. Consult thy leader for further information.</h3>
         </div>
     </div>
 
-
+    <script src="assets/jquery-2.2.0.min.js"></script>
+    <script src="script.js"></script>
     </BODY>
 
 </HTML>

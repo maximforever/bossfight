@@ -1,0 +1,87 @@
+<HTML>
+
+    <HEAD>
+        <link rel = "stylesheet" type = "html/css" href ="assets/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Fondamento:400,400italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Antic+Didone' rel='stylesheet' type='text/css'>
+
+        <link rel = "stylesheet" type = "html/css" href ="style.css">
+    </HEAD>
+
+    <BODY>
+
+    <div class = "header">
+        <div class = "row">
+            <div class = "col-md-3"> 
+                <img class = "logo" src = "assets/logo.png"><img>
+            </div>
+            <div class = "col-md-9">
+                <div class = "dragon-hp">
+                    <h3>WEATHER: <span id = "weather"></span></h3>
+                    <h3>HP: <span id = "bosshealth"></span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class = "jumbotron">
+        <div class= "container">
+        </div>
+    </div> 
+
+
+    <div class = "main ">
+        <div class= "container">
+            
+            <div class = "story">
+                <div id = "story">test here
+                </div>
+            </div>
+            
+
+            <div class = "player-stats">
+                
+                <div class = "row">
+                    <div class = "col-md-4">HEALTH: <span class = "stat" id = "health"></span></div>
+                    <div class = "col-md-4">STRENGTH: <span class = "stat" id = "strength"></span></div>
+                    <div class = "col-md-4">SPEED: <span class = "stat" id = "speed"></span></div>
+                </div>
+
+
+            </div>
+
+            <div class = "row">
+                <div class = "col-md-3">
+                    <h6 class = "team-heading">Teammates:</h6>
+                    <ul class = "teammates" id = "team-list">
+                        <li id = "#">Name 1</li>
+                        <li id = "#">Name 2</li>
+                        <li id = "#">Name 3</li>
+                        <li id = "#">Name 4</li>
+                    </ul>
+                </div>
+
+                <div class = "col-md-9 player-choices">
+                    <button class = "active" id = "attack" onclick="playermove(attack)">Attack</button>
+                    <button class = "active"  id = "dodge" onclick="playermove(dodge)">Dodge</button>
+                    <button class = "active" id = "rest" onclick="playermove(rest)">Rest</button>
+                </div>
+
+
+
+            </div>
+
+
+                
+        </div>
+    </div>
+        
+
+
+
+    <script src="assets/jquery-2.2.0.min.js"></script>
+    <script src="script.js"></script>
+    </BODY>
+
+</HTML>

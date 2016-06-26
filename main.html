@@ -1,79 +1,77 @@
 <HTML>
 
     <HEAD>
-        <link rel = "stylesheet" type = "html/css" href ="assets/bootstrap.min.css">
+
+        <title>THE FIGHT IS ON</title>
+
         <link href='https://fonts.googleapis.com/css?family=Fondamento:400,400italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Antic+Didone' rel='stylesheet' type='text/css'>
 
-        <link rel = "stylesheet" type = "html/css" href ="style.css">
+        <link rel = "stylesheet" href ="assets/bootstrap.min.css">
+        <link rel="stylesheet" href = "style.css">
     </HEAD>
-
     <BODY>
 
-    <div class = "header">
-        <div class = "row">
-            <div class = "col-md-3"> 
-                <img class = "logo" src = "assets/logo.png"><img>
-            </div>
-            <div class = "col-md-9">
-                <div class = "dragon-hp">
-                    <h3>WEATHER: <span id = "weather"></span></h3>
-                    <h3>HP: <span id = "bosshealth"></span></h3>
-                </div>
-            </div>
-        </div>
-    </div>
-
-   
     <div class = "jumbotron">
-        <div class= "container">
-        </div>
-    </div> 
-
-
-    <div class = "main ">
-        <div class= "container">
-            <div class = "player-stats">
-                <div class = "row">
-                    <div class = "col-md-4">HEALTH: <span class = "stat" id = "health"></span></div>
-                    <div class = "col-md-4">STRENGTH: <span class = "stat" id = "strength"></span></div>
-                    <div class = "col-md-4">SPEED: <span class = "stat" id = "speed"></span></div>
-                </div>
-
-
-            </div>
-
-            <div class = "row">
-                <div class = "col-md-3">
-                    <h6 class = "team-heading">Teammates:</h6>
-                    <ul class = "teammates" id = "team-list">
-                        <li id = "#">Name 1</li>
-                        <li id = "#">Name 2</li>
-                        <li id = "#">Name 3</li>
-                        <li id = "#">Name 4</li>
-                    </ul>
-                </div>
-
-                <div class = "col-md-9 player-choices">
-                    <button class = "active" id = "attack" onclick="playermove(attack)">Attack</button>
-                    <button class = "active"  id = "dodge" onclick="playermove(dodge)">Dodge</button>
-                    <button class = "active" id = "rest" onclick="playermove(rest)">Rest</button>
-                </div>
-
-
-
-            </div>
-
-
-                
+        <div class = "container">
         </div>
     </div>
-        
+    
+    <div id = "boss-health-bar">
+        <div id = "boss-alive"><span class = "health-label">Boss's health:<span id = "boss_health"></span></span></div>
+        <div id = "boss-dead"></div>
+    </div>
 
 
+
+    <div id = "user-health-bar">
+        <div id = "user-alive"><span class = "health-label">Your health: <span id = "user_health"></span> / <span id = "full_user_health"></span></span></div>
+        <div id = "user-dead"></div>
+    </div>
+
+
+    <div class = "main-section row">
+    <div id = "clear-space">
+    <button id = "undo">Reset Buttons</button>
+    </div>
+    
+        <div class = "col-md-3">
+        <span class = "action-heading">ACTIONS</span>
+            <div class = "action-holder">
+                <img src = "assets/banner-red.png" alt="attack" onclick="playermove(attack)" class = "action-banner banner-hover" id = "attack"/>
+                <h4 class = "action-label" onclick="playermove(attack)">ATTACK</h4>
+            </div>
+            <div class = "action-holder">
+                <img src = "assets/banner-yellow.png" alt="dodge" onclick="playermove(dodge)" class = "action-banner banner-hover" id = "dodge"/>
+                <h4 class = "action-label" onclick="playermove(attack)">DODGE</h4>
+            </div>
+            <div class = "action-holder">
+                <img src = "assets/banner-green.png" alt="rest" onclick="playermove(rest)" class = "action-banner banner-hover" id = "rest"/>
+                <h4 class = "action-label" onclick="playermove(attack)">REST</h4>
+            </div>   
+        </div>
+
+
+        <div class = "story-div col-md-5">
+            <span class = "action-heading">STORY</span>
+            <p>You are the noble <span id = "name"></span></p>
+            <div id = "story">test here
+
+            </div>
+        </div>
+        <div class = "col-md-4">
+            <span class = "action-heading">TEAM:</span>
+            <ul class = "teammates" id = "team-list">
+
+            </ul>
+        </div>
+    </div>
+
+
+    
 
     <script src="assets/jquery-2.2.0.min.js"></script>
     <script src="script.js"></script>
     </BODY>
 
-</HTML>
+</HTML>    
