@@ -115,6 +115,16 @@ function refresh(result) {
     var resultArray = result.split(";");
     console.log("REFRESHING. Current round: " + resultArray[5]);
 
+    console.log("this round is " + this_round);
+    if (resultArray[5] > this_round) {
+        resetButtons();
+        this_round = resultArray[5];
+        $("body").hide();
+        setTimeout(function() {
+            $("body").show();
+        }, 100);
+    }
+
     if(resultArray[8] <= 0){
         resultArray[8] = 0; //this is a temporary fix. for some reason, health keeps decreasing below 0;
         console.log("aw, sheet, you dead.");
@@ -132,8 +142,8 @@ function refresh(result) {
     $("#weather").append(resultArray[3]);;
     $("#gamestate").empty();
     $("#gamestate").append(resultArray[4]);
-    $("#roundcount").empty();
-    $("#roundcount").append(resultArray[5]);
+    //$("#roundcount").empty();
+    //$("#roundcount").append(resultArray[5]);
     $("#story").empty();
     //refreshStory(resultArray[6]);
 

@@ -4,7 +4,7 @@ body{
     font-family: 'Fondamento', cursive;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 
@@ -84,6 +84,7 @@ body{
 
 .action-holder{
     margin-left: -5%;
+    margin-bottom: 10%;
 }
 
 
@@ -178,7 +179,7 @@ body{
 }
 
 .action-label{
-    position: absolute;
+    position: relative;
     margin-top: -15%;
     margin-left: 15%;
     font-size: 2.5vh;
