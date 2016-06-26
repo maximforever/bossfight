@@ -149,6 +149,12 @@
 			if($gamestate == "setting up") {
 				return "setting up";
 			}
+			elseif($gamestate == "defeat") {
+				return "defeat";
+			}
+			elseif($gamestate == "victory") {
+				return "victory";
+			}
 			elseif(!in_array("playerturn", $arrayplayerstates)) {
 				return "gameturn";
 			}
