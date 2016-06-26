@@ -16,46 +16,59 @@
         <div class = "container">
         </div>
     </div>
+    
     <div id = "boss-health-bar">
-        <span id = "boss_health"></span>
+        <div id = "boss-alive"><span class = "health-label">Boss's health:<span id = "boss_health"></span></span></div>
+        <div id = "boss-dead"></div>
     </div>
+
+
+
     <div id = "user-health-bar">
-        <span id = "user_health"></span>
+        <div id = "user-alive"><span class = "health-label">Your health: <span id = "user_health"></span> / <span id = "full_user_health"></span></span></div>
+        <div id = "user-dead"></div>
     </div>
-    <button id = "undo">Reset Buttons</button>
 
+
+    <div class = "main-section row">
     <div id = "clear-space">
+    <button id = "undo">Reset Buttons</button>
     </div>
-    <p>YOUR NAME IS: <span id = "name"></span></p>
-
-    <div class = "row">
+    
         <div class = "col-md-3">
-
-
-            <img src = "assets/banner-red.png" onclick="playermove(attack)" class = "action-banner banner-hover" id = "attack">
-            <img src = "assets/banner-yellow.png" onclick="playermove(dodge)" class = "action-banner banner-hover" id = "dodge">
-            <img src = "assets/banner-green.png" onclick="playermove(rest)" class = "action-banner banner-hover" id = "rest">
-
+        <span class = "action-heading">ACTIONS</span>
+            <div class = "action-holder">
+                <img src = "assets/banner-red.png" alt="attack" onclick="playermove(attack)" class = "action-banner banner-hover" id = "attack"/>
+                <h4 class = "action-label" onclick="playermove(attack)">ATTACK</h4>
+            </div>
+            <div class = "action-holder">
+                <img src = "assets/banner-yellow.png" alt="dodge" onclick="playermove(dodge)" class = "action-banner banner-hover" id = "dodge"/>
+                <h4 class = "action-label" onclick="playermove(attack)">DODGE</h4>
+            </div>
+            <div class = "action-holder">
+                <img src = "assets/banner-green.png" alt="rest" onclick="playermove(rest)" class = "action-banner banner-hover" id = "rest"/>
+                <h4 class = "action-label" onclick="playermove(attack)">REST</h4>
+            </div>   
         </div>
-        <div class = "col-md-5">
+
+
+        <div class = "story-div col-md-5">
+            <span class = "action-heading">STORY</span>
+            <p>You are the noble <span id = "name"></span></p>
             <div id = "story">test here
+
             </div>
         </div>
         <div class = "col-md-4">
+            <span class = "action-heading">TEAM:</span>
             <ul class = "teammates" id = "team-list">
-                <li id = "#">Name 1</li>
-                <li id = "#">Name 2</li>
-                <li id = "#">Name 3</li>
-                <li id = "#">Name 4</li>
+
             </ul>
         </div>
     </div>
 
 
     
-    
-    
-
 
     <script src="assets/jquery-2.2.0.min.js"></script>
     <script src="script.js"></script>

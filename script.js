@@ -18,6 +18,8 @@ function main(){
 // ------------------
 
 
+// ------------------
+
 
 var this_round = 0;
 var full_boss_health;
@@ -38,12 +40,12 @@ function setHealth(result) {
 
 
 function resetButtons() {                                          // this function sets up all the main action-banner actions
-    $(".action-banner").css('margin-left', '-15%');
+    $(".action-holder").css('margin-left', '-8%');
     $("#attack").attr('src', 'assets/banner-red.png');
     $("#dodge").attr('src', 'assets/banner-yellow.png');
     $("#rest").attr('src', 'assets/banner-green.png');
 
-    $(".action-banner").hover(                              // this gives the banner buttons sexy styling
+    $(".action-holder").hover(                              // this gives the banner buttons sexy styling
         function(){
             console.log("entering");
             new Audio("assets/swoosh.mp3").play();          // this plays our swoosh sound
@@ -51,14 +53,14 @@ function resetButtons() {                                          // this funct
 
         }, function(){
             console.log("leaving");
-            $(this).css('margin-left', '-15%');
+            $(this).css('margin-left', '-8%');
         }
     ); 
 
     $(".action-banner").click(function(){                   // on click, we select one 
         console.log("clicked!");
         $(".action-banner").not(this).attr('src', 'assets/banner-inactive.png');
-        $(".action-banner").off('click mouseenter mouseleave');          // this unbinds all hover and click effects        
+        $(".action-holder").off('click mouseenter mouseleave');          // this unbinds all hover and click effects        
         
     });
 };
@@ -78,13 +80,18 @@ function updateStory(array){
 function updateBossHealth(boss_health){
     console.log("updating boss health");
     console.log(boss_health + "/" + full_boss_health);
-    $("#boss-health-bar").css("width", boss_health/full_boss_health * $( window ).width());
+    $("#boss-alive").css("width", boss_health/full_boss_health * $( window ).width());
+    $("#boss-dead").css("width", (1-boss_health/full_boss_health) * $( window ).width());
 }
 
 function updateUserHealth(user_health){
     console.log("updating user health");
     console.log(user_health + "/" + full_user_health);
-    $("#user-health-bar").css("width", user_health/full_user_health * $( window ).width());
+
+    $("#full_user_health").empty().append(full_user_health);
+
+    $("#user-alive").css("width", user_health/full_user_health * $( window ).width());
+    $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );
 }
 
 
@@ -98,7 +105,7 @@ function updateTeam(array){
     team = array.split(",");
     for(var i = 0 ; i < team.length; i++){
         console.log(team[i]);
-        $('#team-list').append("<li>" + team[i] +"</li>");
+        $('#team-list').append("<li class = 'team-mate'>" + team[i] +"</li>");
     }
 };
 

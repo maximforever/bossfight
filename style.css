@@ -18,16 +18,54 @@ body{
     background-position: 50% 78%;
 }
 
+.main-section {
+    background: #fff7dd;
+}
+
 #boss-health-bar{
     height: 5%;
     width: 100%;
-    background: green;
+}
+
+#boss-alive{
+    height: 100%;
+    width: 100%;
+    background: #33076D;
+    float: left;
+
+}
+
+#boss-dead{
+    height: 100%;
+    width: 100%;
+    background: #FFF37C;
+    float: right;
 }
 
 #user-health-bar{
     height: 5%;
     width: 100%;
-    background: orange;
+}
+
+#user-alive{
+    height: 100%;
+    width: 100%;
+    background: #00B100;
+    float: left;
+
+}
+
+#user-dead{
+    height: 100%;
+    width: 100%;
+    background: #FF3939;
+    float: right;
+}
+
+
+.health-label{
+    color: white;
+    background: black;
 }
 
 
@@ -36,13 +74,16 @@ body{
 }
 
 .action-banner {
-    height: 8%;
+    height: 10%;
     max-width: 100%;
     color: white;
     font-size: 4vh;         /* NOTE THAT THIS TEXT SCALES*/
-    padding: 5% 0%  0% 0%;
-    margin-left: -15%;
+    padding: 0% 0%  5% 0%;
     display: block;
+}
+
+.action-holder{
+    margin-left: -5%;
 }
 
 
@@ -136,5 +177,68 @@ body{
     color: white;
 }
 
+.action-label{
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 15%;
+    font-size: 2.5vh;
+    font-weight: bold;
+    z-index: 2;
+}
 
+.action-heading{
+    font-family: 'Antic Didone', serif;
+    font-size: 25px;
+    background: #532700;
+    color: white;
+    display: block;
+    text-align: center;
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+
+/*STORY DIV*/
+
+.story-div{
+    min-height: 30%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    font-size: 20px;
+}
+
+
+
+/*LEADER  & PARTICIPANT PAGE*/
+
+.waiting-to-join{
+    text-align: center;
+}
+
+.start-game{
+    position: absolute;
+    bottom: 15%;
+    right: 38%
+}
+
+.team-mate{
+    list-style: none;
+}
+
+.waiting .team-mate{
+    list-style: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'Antic Didone', serif;
+}
+
+
+.waiting-sign{
+    margin-top: 30px;
+    color: #6EF300;
+    font-size: 30px;
+    text-align: center;    
+}
 
