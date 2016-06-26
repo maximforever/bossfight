@@ -10,6 +10,10 @@
 
 		$newspeed = $speed - 2;
 
+		if ($newspeed < 0) {
+			$newspeed = 0;
+		}
+
 	//---update stats---//
 		$query2 = "UPDATE players SET speed = ('$newspeed') WHERE playerid = '$playerid' ";
 			mysql_query($query2) or die (mysql_error());

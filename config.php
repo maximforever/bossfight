@@ -23,7 +23,7 @@
 
 			//starting
 				elseif ($n == "starting_health") {
-					return 100;			/* CHANGED to 100 for testing, shoud be 20*/
+					return 100;			/* CHANGED to 100 for testing, should be 20*/
 				}	
 				elseif ($n == "starting_strength") {
 					return 10;
@@ -103,22 +103,22 @@
 
 			//heal
 				elseif ($n == "heal_health_min") {
-					return 1;
+					return 10;
 				}
 				elseif ($n == "heal_health_max") {
-					return 5;
+					return 30;
 				}
 				elseif ($n == "heal_strength_min") {
-					return 1;
+					return 3;
 				}
 				elseif ($n == "heal_strength_max") {
-					return 5;
+					return 6;
 				}
 				elseif ($n == "heal_speed_min") {
-					return 1;
+					return 3;
 				}
 				elseif ($n == "heal_speed_max") {
-					return 5;
+					return 6;
 				}
 
 			}

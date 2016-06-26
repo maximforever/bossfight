@@ -112,6 +112,7 @@ function updateTeam(array){
 
 function refresh(result) {
 
+
     var resultArray = result.split(";");
     console.log("REFRESHING. Current round: " + resultArray[5]);
 
@@ -163,6 +164,11 @@ function refresh(result) {
     $("#team-list").empty();
     //refreshTeam(resultArray[13]);
 
+    $("#boss_max_health").empty();
+    $("#boss_max_health").empty(resultArray[14]);
+    $("#player_max_health").empty();
+    $("#player_max_health").empty(resultArray[15]);
+
     //refresh buttons:
     updateStory(resultArray[6]);
     updateTeam(resultArray[13]);
@@ -172,6 +178,11 @@ function refresh(result) {
 
     //redirect to "dead" screen if the player is dead:
 
+    //redirect from participant.html to start game:
+    if (( String( $(window).attr("location") ).indexOf("participant.html") > 0 ) && (resultArray[4] !== "setting up")) {
+        console.log("redirecting to main page");
+        $(window).attr("location","http://localhost/bossfight/main.html");
+    }
 
 }
 

@@ -64,6 +64,7 @@
 			$roundcount = $row["roundcount"];
 			$arrayplayersid = explode(",",$row["players"]);
 				array_pop($arrayplayersid);
+			$bossmaxhealth = number("starting_boss_health_per_player") * count($arrayplayersid);
 
 		//---player stats---//
 			if($playerid > 0) {
@@ -77,6 +78,7 @@
 				$speed = $row["speed"];
 				$playermove = $row["playermove"];
 				$playerstate = $row["playerstate"];
+				$playermaxhealth = number("starting_health");
 
 				$arrayplayerid = array($playerid);
 				$arrayplayersid = array_diff($arrayplayersid,$arrayplayerid);
@@ -88,6 +90,7 @@
 				$speed = 0;
 				$playermove = 0;
 				$playerstate = 0;
+				$playermaxhealth = 0;
 			}
 
 		//---players list---//
@@ -121,7 +124,9 @@
 				$speed.";". //10
 				$playermove.";". //11
 				$playerstate.";". //12
-				$playernames; //13
+				$playernames.";". //13
+				$bossmaxhealth.";". //14
+				$playermaxhealth; //15
 		}
 
 	//---whose turn---//
