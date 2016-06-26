@@ -18,7 +18,7 @@
     </div>
     
     <div id = "boss-health-bar">
-        <div id = "boss-alive"><span class = "health-label">Boss's health:<span id = "boss_health"></span></span></div>
+        <div id = "boss-alive"><span class = "health-label">Boss's health: <span id = "boss_health"></span> / <span id = "full_boss_health"></span></span></div>
         <div id = "boss-dead"></div>
     </div>
 
@@ -39,11 +39,11 @@
         <span class = "action-heading">ACTIONS</span>
             <div class = "action-holder">
                 <img src = "assets/banner-red.png" alt="attack" onclick="playermove('attack')" class = "action-banner banner-hover" id = "attack"/>
-                <h4 class = "action-label" onclick="playermove('attack')">ATTACK</h4>
+                <h4 class = "action-label" onclick="playermove('attack')">ATTACK (<span id = "strength"></span>)</h4>
             </div>
             <div class = "action-holder">
                 <img src = "assets/banner-yellow.png" alt="dodge" onclick="playermove('dodge')" class = "action-banner banner-hover" id = "dodge"/>
-                <h4 class = "action-label" onclick="playermove('dodge')">DODGE</h4>
+                <h4 class = "action-label" onclick="playermove('dodge')">DODGE (<span id = "speed"></span>)</h4>
             </div>
             <div class = "action-holder">
                 <img src = "assets/banner-green.png" alt="heal" onclick="playermove('heal')" class = "action-banner banner-hover" id = "heal"/>
@@ -68,7 +68,12 @@
     </div>
 
 
-    
+
+    <!-- <div class = "overlay">
+        <div class = "about-pane">
+        </div>
+    </div>
+     -->
 
     <script src="assets/jquery-2.2.0.min.js"></script>
     <script src="script.js"></script>

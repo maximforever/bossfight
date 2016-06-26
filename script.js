@@ -22,28 +22,13 @@ function main(){
 
 
 var this_round = 0;
-var full_boss_health;
-var full_user_health;
-
-
-function setHealth(result) {
-    
-    var resultArray = result.split(";");
-    full_boss_health = resultArray[2];
-    full_user_health = resultArray[8];
-    console.log(resultArray);
-    console.log("Setting the initial boss health at: " + full_boss_health);
-    console.log("Setting the initial user health at: " + full_user_health);
-
-
-}
 
 
 function resetButtons() {                                          // this function sets up all the main action-banner actions
     $(".action-holder").css('margin-left', '-8%');
     $("#attack").attr('src', 'assets/banner-red.png');
     $("#dodge").attr('src', 'assets/banner-yellow.png');
-    $("#rest").attr('src', 'assets/banner-green.png');
+    $("#heal").attr('src', 'assets/banner-green.png');
 
     $(".action-holder").hover(                              // this gives the banner buttons sexy styling
         function(){
@@ -77,18 +62,19 @@ function updateStory(array){
 };
 
 
-function updateBossHealth(boss_health){
+function updateBossHealth(boss_health, full_boss_health){
     console.log("updating boss health");
     console.log(boss_health + "/" + full_boss_health);
     $("#boss-alive").css("width", boss_health/full_boss_health * $( window ).width());
     $("#boss-dead").css("width", (1-boss_health/full_boss_health) * $( window ).width());
 }
 
-function updateUserHealth(user_health){
+function updateUserHealth(user_health, full_user_health, full_boss_health){
     console.log("updating user health");
     console.log(user_health + "/" + full_user_health);
 
     $("#full_user_health").empty().append(full_user_health);
+    $("#full_boss_health").empty().append(full_boss_health);
 
     $("#user-alive").css("width", user_health/full_user_health * $( window ).width());
     $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );
@@ -111,7 +97,6 @@ function updateTeam(array){
 
 
 function refresh(result) {
-
 
     var resultArray = result.split(";");
     console.log("REFRESHING. Current round: " + resultArray[5]);
@@ -173,8 +158,8 @@ function refresh(result) {
     updateStory(resultArray[6]);
     updateTeam(resultArray[13]);
     console.log("Boss:" + resultArray[1]);
-    updateBossHealth(resultArray[2]);
-    updateUserHealth(resultArray[8]);
+    updateBossHealth(resultArray[2], resultArray[14]);
+    updateUserHealth(resultArray[8], resultArray[15], resultArray[14]);
 
     //redirect to "dead" screen if the player is dead:
 
@@ -183,6 +168,7 @@ function refresh(result) {
         console.log("redirecting to main page");
         $(window).attr("location","http://localhost/bossfight/main.html");
     }
+
 
 }
 
@@ -216,7 +202,6 @@ function refresh(result) {
                 cache: false,
                 success: function(result) {
                     console.log("initial load");
-                    setHealth(result);
                     refresh(result);
                 }
             });

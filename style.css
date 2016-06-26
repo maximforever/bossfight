@@ -182,7 +182,7 @@ body{
     position: relative;
     margin-top: -15%;
     margin-left: 15%;
-    font-size: 2.5vh;
+    font-size: 2vh;
     font-weight: bold;
     z-index: 2;
 }
@@ -241,5 +241,27 @@ body{
     color: #6EF300;
     font-size: 30px;
     text-align: center;    
+}
+
+/* POP UP PANE*/
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(37, 37, 37, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.about-pane {
+    position: absolute;
+    background: black;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 4;
 }
 
