@@ -12,7 +12,11 @@
 		}
 		elseif(isset($_POST["game"])) {
 			$playerid = 0;
-			$gameid = $_POST["game"];
+			$gamecode = $_POST["game"];
+			$query0 = "SELECT * FROM games WHERE gamecode = '$gamecode' ";
+				$recordset = mysql_query($query0) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+			$gameid = $row["gameid"];
 		}
 	
 	//---check whose turn it is---//
@@ -56,6 +60,7 @@
 				$row = mysql_fetch_array($recordset);
 		
 		//---game stats---//
+			$gamecode = $row["gamecode"];
 			$boss = $row["boss"];
 			$bosshealth = $row["bosshealth"];
 			$weather = $row["weather"];
@@ -93,6 +98,10 @@
 				$playermaxhealth = 0;
 			}
 
+			if($playerstate == "dead") {
+				unset($_SESSION["playerid"]);
+			}
+
 		//---players list---//
 			$arrayplayernames = array("");
 				array_pop($arrayplayernames);
@@ -126,7 +135,8 @@
 				$playerstate.";". //12
 				$playernames.";". //13
 				$bossmaxhealth.";". //14
-				$playermaxhealth; //15
+				$playermaxhealth.";". //15
+				$gamecode; //16
 		}
 
 	//---whose turn---//
@@ -155,9 +165,11 @@
 				return "setting up";
 			}
 			elseif($gamestate == "defeat") {
+				unset($_SESSION["playerid"]);
 				return "defeat";
 			}
 			elseif($gamestate == "victory") {
+				unset($_SESSION["playerid"]);
 				return "victory";
 			}
 			elseif(!in_array("playerturn", $arrayplayerstates)) {

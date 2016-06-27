@@ -7,7 +7,14 @@ body{
     /*overflow: hidden;*/
 }
 
-
+#menu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 2;
+    font-weight: bold;
+    padding: 10px;
+}
 
 .jumbotron {
     padding: 0px;

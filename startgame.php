@@ -14,7 +14,11 @@
 		else {
 			$playerid = 0;
 			if(isset($_GET["game"])) {
-				$gameid = $_GET["game"];
+				$gamecode = $_POST["game"];
+				$query0 = "SELECT * FROM games WHERE gamecode = '$gamecode' ";
+					$recordset = mysql_query($query0) or die (mysql_error());
+					$row = mysql_fetch_array($recordset);
+				$gameid = $row["gameid"];
 			}
 		}
 
@@ -26,30 +30,45 @@
 			include("newgame.php");
 			$gameid = new_game();
 
+			$query1 = "SELECT * FROM games WHERE gameid = '$gameid' ";
+				$recordset = mysql_query($query1) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+			$gamecode = $row["gamecode"];
+
 			include("newplayer.php");
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: leader.html?game=".$gameid);
+			header("location: leader.html?game=".$gamecode);
 		}
 
 	//---join game button---//
 		elseif(isset($_POST["joingame"])) {
 			$name = $_POST["name"];
-			$gameid = $_POST["joincode"];
+			$gamecode = $_POST["joincode"];
 			$browserinfo = $_SERVER['HTTP_USER_AGENT'];
+
+			$query1 = "SELECT * FROM games WHERE gamecode = '$gamecode' ";
+				$recordset = mysql_query($query1) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+
+			$gameid = $row["gameid"];
 				
 			include("newplayer.php");
 			$playerid = new_player($name, $gameid, $browserinfo);
 			$_SESSION["playerid"] = $playerid;
 
-			header("location: participant.html?game=".$gameid);
+			header("location: participant.html?game=".$gamecode);
 		}
 
 	//---start game button---//
 		elseif(isset($_POST["startgame"]) and isset($_SESSION["playerid"])) {
 			$gameid = start_game($gameid);
-			header("location: main.html?game=".$gameid);
+			$query1 = "SELECT * FROM games WHERE gamecode = '$gamecode' ";
+				$recordset = mysql_query($query1) or die (mysql_error());
+				$row = mysql_fetch_array($recordset);
+			$gamecode = $row["gamecode"];
+			header("location: main.html");
 		}
 
 	//---quit game button---//
@@ -57,6 +76,7 @@
 			$playerid = $_SESSION["playerid"];
 			$_SESSION["playerid"] = quit_game($playerid);
 			unset($_SESSION["playerid"]);
+			header("location: index.html");
 		}
 
 	//---function start_game---//

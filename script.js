@@ -76,10 +76,6 @@ function updateUserHealth(user_health, full_user_health){
     console.log(user_health + "/" + full_user_health);
 
     $("#full_user_health").empty().append(full_user_health);
-
-    /*$("#user-alive").css("width", user_health/full_user_health * $( window ).width());
-    $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );*/
-
     $("#user-alive").width(100 * (user_health/full_user_health) + "%");
     $("#user-dead").width(100 - (100 * user_health/full_user_health) + "%");
 }
@@ -109,18 +105,11 @@ function refresh(result) {
     if (resultArray[5] > this_round) {
         resetButtons();
         this_round = resultArray[5];
-        $("body").hide();
+        $("body").hide(); //white flash
         setTimeout(function() {
             $("body").show();
         }, 100);
     }
-
-    if(resultArray[8] <= 0){
-        resultArray[8] = 0; //this is a temporary fix. for some reason, health keeps decreasing below 0;
-        console.log("aw, sheet, you dead.");
-        $(window).attr("location","http://localhost/bossfight/lose.html");      //this redirects us to the lose page.
-    }
-
 
     $("#gameid").empty();
     $("#gameid").append(resultArray[0]);
@@ -157,6 +146,8 @@ function refresh(result) {
     $("#boss_max_health").empty(resultArray[14]);
     $("#player_max_health").empty();
     $("#player_max_health").empty(resultArray[15]);
+    $("#gamecode").empty();
+    $("#gamecode").append(resultArray[16]);
 
     //refresh buttons:
     updateStory(resultArray[6]);
@@ -165,12 +156,27 @@ function refresh(result) {
     updateBossHealth(resultArray[2], resultArray[14]);
     updateUserHealth(resultArray[8], resultArray[15], resultArray[14]);
 
+    console.log(resultArray);
+
     //redirect to "dead" screen if the player is dead:
+    if(resultArray[12] == "dead") {
+        console.log("aw, sheet, you dead.");
+        $(window).attr("location","lose.html");      //this redirects us to the lose page.
+    }
 
     //redirect from participant.html to start game:
     if (( String( $(window).attr("location") ).indexOf("participant.html") > 0 ) && (resultArray[4] !== "setting up")) {
         console.log("redirecting to main page");
-        $(window).attr("location","http://localhost/bossfight/main.html");
+        $(window).attr("location","main.html");
+    }
+
+    //hide things if no player:
+    if (resultArray[12] === "0") {
+        $("#youare").hide();
+        $("#user-health-bar").hide();
+        $(".action-div").hide();
+        $(".team-div").hide();
+        $(".story-div").css("width","100%");
     }
 
 
