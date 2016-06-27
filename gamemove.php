@@ -57,6 +57,7 @@
 						$story = $story."Wind reduces @".$playerid."&'s attack to ".$attack." damage.,"; //story
 					}
 					else {
+						$story = $story."@".$playerid."&".storytime("attack").","; //storytime
 						$story = $story."@".$playerid."& attacks for ".$attack." damage.,"; //story
 					}
 
@@ -123,13 +124,16 @@
 
 						if($damage < 0) {
 							$damage = 0;
+							$story = $story."@".$playerid."&".storytime("dodge").","; //storytime
 							$story = $story."@".$target."& dodges the ".$boss."'s attack and takes no damage.,"; //story
 						}
 						else {
+							$story = $story."@".$playerid."&".storytime("dodge").","; //storytime
 							$story = $story."@".$target."& dodges the ".$boss."'s attack but takes ".$damage." damage.,"; //story
 						}
 					}
 					else {
+						$story = $story."The ".$boss.storytime("boss").","; //storytime
 						$story = $story."The ".$boss." focuses an attack on @".$target."& for ".$damage." damage.,"; //story
 					}
 
@@ -141,6 +145,7 @@
 
 			//---attack all players---//
 				elseif ($bossmove == "attackall") {
+					$story = $story."The ".$boss.storytime("boss").","; //storytime
 					$story = $story."The ".$boss." attacks everyone.,"; //story
 					$arraybossattack = explode(";",boss_attack_all($arrayplayersid));
 					$arraytargets = explode(",",$arraybossattack[0]);
@@ -165,9 +170,11 @@
 
 							if($damage < 0) {
 								$damage = 0;
+								$story = $story."@".$playerid."&".storytime("dodge").","; //storytime
 								$story = $story."@".$target."& dodges the ".$boss."'s attack and takes no damage.,"; //story
 							}
 							else {
+								$story = $story."@".$playerid."&".storytime("dodge").","; //storytime
 								$story = $story."@".$target."& dodges the ".$boss."'s attack but takes ".$damage." damage.,"; //story
 							}
 						}
@@ -198,6 +205,7 @@
 
 				if($move == "heal") {
 					heal($playerid);
+					$story = $story."@".$playerid."&".storytime("heal").","; //storytime
 					$story = $story."@".$playerid."& heals the team to help them recover.,"; //story
 				}
 			}
@@ -217,6 +225,7 @@
 					$arraydead = array_merge($arraydead, $deadplayer);
 
 					if($row["playerstate"] !== "dead") {
+						$story = $story."@".$playerid."&".storytime("die").","; //storytime
 						$story = $story."@".$playerid."& has died.,"; //story
 						$query12 = "UPDATE players SET health = '0' WHERE playerid = '$playerid' ";
 							mysql_query($query12) or die (mysql_error());

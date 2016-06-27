@@ -124,4 +124,115 @@
 			}
 		}
 
+		if(!function_exists('storytime')) {
+			function storytime ($move) {
+				$random = mt_rand(0,99);
+				
+				if ($move == "dodge") {
+					if (($random >= 0) && ($random < 20)) {
+						return " jumps out of the way just as the flame strikes the tips of his/her mustache.";
+					}
+					if (($random >= 20) && ($random < 40)) {
+						return " walks two steps to the left and grins.";
+					}
+					if (($random >= 40) && ($random < 60)) {
+						return " bends down to pick up a shiny coin and the fire scorches the top of his/her hair.";
+					}
+					if (($random >= 60) && ($random < 80)) {
+						return "... something something Matrix reference.";
+					}
+					if (($random >= 80) && ($random < 100)) {
+						return " can't even get hit right.";
+					}
+				}
+
+				elseif ($move == "attack") {
+					if (($random >= 0) && ($random < 20)) {
+						return " is just showing off now.";
+					}
+					if (($random >= 20) && ($random < 40)) {
+						return " accidentally charges ahead like a madman on bath salts.";
+					}
+					if (($random >= 40) && ($random < 60)) {
+						return " : 'LEEEEEROYYYYYYY JENKINS!!!1!!1!'";
+					}
+					if (($random >= 60) && ($random < 80)) {
+						return " has somehow managed to actually deal some damage.";
+					}
+					if (($random >= 80) && ($random < 100)) {
+						return " aims true and strikes right between the eyes.";
+					}
+				}
+
+				elseif ($move == "heal") {
+					if (($random >= 0) && ($random < 20)) {
+						return " summons the power of the gods.";
+					}
+					if (($random >= 20) && ($random < 40)) {
+						return " is a certified physician.";
+					}
+					if (($random >= 40) && ($random < 60)) {
+						return " does a little dance and sings a little song.";
+					}
+					if (($random >= 60) && ($random < 80)) {
+						return " is using those college CPR classes to a great extent.";
+					}
+					if (($random >= 80) && ($random < 100)) {
+						return " masterfully cures some wounds.";
+					}
+				}
+
+				elseif ($move == "boss") {
+					if (($random >= 0) && ($random < 10)) {
+						return " snarls and growls and howls and strikes.";
+					}
+					if (($random >= 10) && ($random < 20)) {
+						return " swoops down from above to deal a damaging blow.";
+					}
+					if (($random >= 20) && ($random < 30)) {
+						return " spins around and strikes everyone in its path.";
+					}
+					if (($random >= 30) && ($random < 40)) {
+						return " locks on target.";
+					}
+					if (($random >= 40) && ($random < 50)) {
+						return " bashes into the heroes.";
+					}
+					if (($random >= 50) && ($random < 60)) {
+						return " huffs and puffs and blows the heroes down.";
+					}
+					if (($random >= 60) && ($random < 70)) {
+						return " rampages around the dungeon.";
+					}
+					if (($random >= 70) && ($random < 80)) {
+						return " trips and falls into the heroes like a bunch of bowling pins.";
+					}
+					if (($random >= 80) && ($random < 90)) {
+						return " actually does nothing but the hero pulls a muscle anyway.";
+					}
+					if (($random >= 90) && ($random < 100)) {
+						return " finds your lack of faith disturbing.";
+					}
+				}
+
+				elseif ($move == "die") {
+					if (($random >= 0) && ($random < 20)) {
+						return "... THIS WAS A TRIUMPH. I'M MAKING A NOTE HERE: HUGE SUCCESS.";
+					}
+					if (($random >= 20) && ($random < 40)) {
+						return "... gg.";
+					}
+					if (($random >= 40) && ($random < 60)) {
+						return "... GAME OVER.";
+					}
+					if (($random >= 60) && ($random < 80)) {
+						return "... WASTED.";
+					}
+					if (($random >= 80) && ($random < 100)) {
+						return "... Requiescat in pace.";
+					}
+				}
+			}
+		}
+
 ?>

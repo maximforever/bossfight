@@ -65,19 +65,23 @@ function updateStory(array){
 function updateBossHealth(boss_health, full_boss_health){
     console.log("updating boss health");
     console.log(boss_health + "/" + full_boss_health);
-    $("#boss-alive").css("width", boss_health/full_boss_health * $( window ).width());
-    $("#boss-dead").css("width", (1-boss_health/full_boss_health) * $( window ).width());
+    $("#boss-alive").width(100 * (boss_health/full_boss_health) + "%");
+    $("#boss-dead").width(100 - (100 * boss_health/full_boss_health) + "%");
+    $("#full_boss_health").empty().append(full_boss_health);
+
 }
 
-function updateUserHealth(user_health, full_user_health, full_boss_health){
+function updateUserHealth(user_health, full_user_health){
     console.log("updating user health");
     console.log(user_health + "/" + full_user_health);
 
     $("#full_user_health").empty().append(full_user_health);
-    $("#full_boss_health").empty().append(full_boss_health);
 
-    $("#user-alive").css("width", user_health/full_user_health * $( window ).width());
-    $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );
+    /*$("#user-alive").css("width", user_health/full_user_health * $( window ).width());
+    $("#user-dead").css("width", (1-user_health/full_user_health) * $( window ).width() );*/
+
+    $("#user-alive").width(100 * (user_health/full_user_health) + "%");
+    $("#user-dead").width(100 - (100 * user_health/full_user_health) + "%");
 }
 
 
